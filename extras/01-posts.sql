@@ -45,8 +45,7 @@ create table posts_tagged(
     foreign key         (id_post) references posts(id_post)                           /*la clave foranea a posts*/
 );
 create unique index posts_tagged_id_post_tagged on posts_tagged (id_post_tagged);
-insert into posts_tagged(id_post,id_tag)values(1,2);
-insert into posts_tagged(id_post,id_tag)values(1,3);
+
 
 
 /*esta es la tabla de categories*/
@@ -72,9 +71,7 @@ create table posts_categories(
     foreign key         (id_post) references posts(id_post)                           /*la clave foranea a posts*/
 );
 create unique index posts_categories_id_post_categories on posts_categories (id_post_categories);
-/*datos de ejemplo*/
-insert into posts_categories(id_post,id_category)values(1,1);
-insert into posts_categories(id_post,id_category)values(1,2);
+
 
 
 /*esta es la tabla de comentarios*/
@@ -82,25 +79,23 @@ drop table if exists comments;
 create table comments(
     id_comment          integer      primary key AUTOINCREMENT,
     id_post             smallint     not null,                                        /*relacion a posts*/
-    comment             varchar(512) not null,                                        /*el comentario*/
-    avatar              varchar(512) default null,                                    /*el avatar*/
+    name                varchar(64)  not null,                                        /*el nombre*/
+    comment             varchar(140) not null,                                        /*el comentario*/
     datePublished       datetime     default (datetime('now','localtime')),           /*fecha de publicacion*/
-    status              varchar(1)   not null check (status in ('f','t')) default 't',/*el estatus del comentario*/
+    status              varchar(1)   not null check (status in ('f','t')) default 'f',/*el estatus del comentario*/
     foreign key         (id_post)    references posts(id_post)                        /*la clave foranea a posts*/
 );
 create unique index comments_id_comment on comments (id_comment);
 
-
-
 /*buscar por etiqueta*/
-select title,description from posts
-inner join posts_tagged on (posts_tagged.id_post  = posts.id_post)
-inner join tags         on (posts_tagged.id_tag   = tags.id_tag)
-where tags.tag='Lua';
+-- select title,description from posts
+-- inner join posts_tagged on (posts_tagged.id_post  = posts.id_post)
+-- inner join tags         on (posts_tagged.id_tag   = tags.id_tag)
+-- where tags.tag='Lua';
 
 /*buscar por categoria*/
-select title,description from posts
-inner join posts_categories on (posts_categories.id_post    = posts.id_post)
-inner join categories       on (posts_categories.id_category= categories.id_category)
-where categories.category='Tecnología';
+-- select title,description from posts
+-- inner join posts_categories on (posts_categories.id_post    = posts.id_post)
+-- inner join categories       on (posts_categories.id_category= categories.id_category)
+-- where categories.category='Tecnología';
 

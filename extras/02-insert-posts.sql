@@ -568,3 +568,19 @@ Liquid::Template.register_tag(''image'', Jekyll::ImageTag)
 
 <p><a href="http://heyitsalex.net/">Hey, it&rsquo;s Alex</a> was migrated in less than a <em>father-with-kids day</em> from Jekyll to Hugo. You can see all the changes (and screw-ups) by looking at this <a href="https://github.com/alexandre-normand/alexandre-normand/compare/869d69435bd2665c3fbf5b5c78d4c22759d7613a...b7f6605b1265e83b4b81495423294208cc74d610">diff</a>.</p>')
 ;
+
+
+
+/*algunas tags*/
+insert into posts_tagged(id_post,id_tag)values(1,2);
+insert into posts_tagged(id_post,id_tag)values(1,3);
+
+/*algunas categorias*/
+insert into posts_categories(id_post,id_category)values(1,1);
+insert into posts_categories(id_post,id_category)values(1,2);
+
+/*algunos comentarios*/
+insert into comments(id_post,name,comment)values(1,'Juan','este es un comntario para la primera publicacion');
+insert into comments(id_post,name,comment)values(1,'Jhon','este es otro comntario para la primera publicacion');
+insert into comments(id_post,name,comment)values(2,'Jeshua','este es un comntario para la segunda publicacion');
+

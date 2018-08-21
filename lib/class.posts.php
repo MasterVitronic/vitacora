@@ -354,8 +354,7 @@ class posts {
         $words      = $this->wordCount($str);
         $mimute     = floor($words / 200);
         return $mimute . ' minuto' . ($mimute == 1 ? '' : 's');
-    }
-    
+    }   
 }
 
 
