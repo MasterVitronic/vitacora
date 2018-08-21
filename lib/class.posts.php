@@ -143,7 +143,7 @@ class posts {
      *
      * Retorna el total de paginas
      */  
-    public function getTotalPages() {
+    private function getTotalPages() {
         $sql_total = "select count(id_post) from posts where status='t' ";
         $recordsTotal = $this->cbd->get_var($sql_total);
         if( $recordsTotal ){
@@ -151,7 +151,50 @@ class posts {
         }
         return false;
     }
-        
+
+    /**
+     * Método getTags
+     *
+     * Retorna las etiquetas de el posts
+     */
+    private function getTags($url) {
+        $sql = "select tag from tags "
+                ."join posts_tagged on (posts_tagged.id_tag=tags.id_tag) "
+                ."join posts        on (posts.id_post=posts_tagged.id_post) "
+                ."where posts.url='$url' and status='t' ";
+        $results = $this->cbd->get_results($sql);
+        if ($results) {
+            foreach ($results as $campo => $valor) {
+                $data[]=[
+                    'tag'=>$valor->tag
+                ];
+            }
+            return $data;
+        }
+        return false;        
+    }
+    
+    /**
+     * Método getCategories
+     *
+     * Retorna las categorias de el posts
+     */
+    public function getCategories($url) {
+        $sql = "select category from categories "
+                ."join posts_categories on (posts_categories.id_category=categories.id_category) "
+                ."join posts            on (posts.id_post=posts_categories.id_post) "
+                ."where posts.url='$url' and status='t' ";
+        $results = $this->cbd->get_results($sql);
+        if ($results) {
+            foreach ($results as $campo => $valor) {
+                $data[]=[
+                    'category'=>$valor->category
+                ];
+            }
+            return $data;
+        }
+        return false;
+    }        
     /**
      * Método getPages
      *
@@ -169,6 +212,7 @@ class posts {
         if ($results) {
             foreach ($results as $campo => $valor) {
                 $data['pages'][] = [
+                        'site_url'      => site_url,
                         'url'           => $valor->url,
                         'title'         => $valor->title,
                         'description'   => $valor->description,
@@ -208,6 +252,7 @@ class posts {
         $result = $this->cbd->get_row($sql);
         if ($result) {
             $data = [
+                'site_url'      => site_url,
                 'url'           => $result->url,
                 'title'         => $result->title,
                 'description'   => $result->description,
@@ -217,7 +262,9 @@ class posts {
                 'dateModified'  => date("c",strtotime($result->dateModified)),
                 'wordCount'     => $this->wordCount($result->articleBody),
                 'author'        => $result->fullname,
-                'readingTime'   => $this->readingTime($result->articleBody)
+                'readingTime'   => $this->readingTime($result->articleBody),
+                'categories'    => $this->getCategories($result->url),
+                'tags'          => $this->getTags($result->url)
             ];
             return $data;
         }

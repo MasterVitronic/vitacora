@@ -6,12 +6,12 @@
         <meta itemprop="dateModified"     content="{{dateModified}}" />
         <meta itemprop="wordCount"        content="{{wordCount}}">
         <meta itemprop="image"            content="https://vitronic.me/img/Master-Vitronic.png">
-        <meta itemprop="mainEntityOfPage" content="https://vitronic.me/{{url}}"/>
-        <meta itemprop="url"              content="https://vitronic.me/{{url}}" />
+        <meta itemprop="mainEntityOfPage" content="{{{site_url}}}/{{url}}"/>
+        <meta itemprop="url"              content="{{{site_url}}}/{{url}}" />
         <div style="display: none;" itemprop="author" itemscope itemtype="https://schema.org/Person">
-            <meta itemprop="url" content="https://vitronic.me/" />
-            <meta itemprop="name" content="{{{author}}}" />
-            <meta itemprop="image" content="https://vitronic.me/img/Master-Vitronic.png" />
+            <meta itemprop="url"    content="{{{site_url}}}" />
+            <meta itemprop="name"   content="{{{author}}}" />
+            <meta itemprop="image"  content="https://vitronic.me/img/Master-Vitronic.png" />
         </div>
         <div style="display: none;" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
             <meta itemprop="name" content="{{author}}" />
@@ -39,18 +39,21 @@
         <hr>
         <p>
             Publicado por
-            <span><a href="/resume">{{author}}</a></span> en
+            <span><a href="/resume">{{author}}</a></span> el
             <time>{{humanDate}}</time> en
+            {{#categories}}
             <span itemprop="articleSection">
-               <a href="">Development</a> y
-               <a href="">golang</a>
-            </span> y etiquetado como
-            <a href="">development</a>,
-            <a href="">go</a>,
-            <a href="">golang</a> y
-            <a href="">hugo</a> ,se usaron 
+               <a href="">{{category}}</a>,
+            </span>
+            {{/categories}}
+             y etiquetado como
+             {{#tags}}
+            <a href="">{{tag}}</a>,
+            {{/tags}}
+             se usaron 
             <span>{{wordCount}}</span> palabras.
         </p>
+<!--
         <aside>
             <header>Contenido Relacionado:</header>
             <ul>
@@ -62,5 +65,6 @@
                 </li>
             </ul>
         </aside>       
+-->
     </article>
 </main>

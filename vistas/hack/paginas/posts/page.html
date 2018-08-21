@@ -10,12 +10,12 @@
                         </h2>
                         <p class="muted">
                             <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-                                        <circle cx="16" cy="16" r="14" />
-                                        <path d="M16 8 L16 16 20 20" />
+                                <circle cx="16" cy="16" r="14" />
+                                <path d="M16 8 L16 16 20 20" />
                             </svg>
-                            <span>8 minutos de lectura</span>
+                            <span>{{readingTime}} minutos de lectura</span>
                             <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-                                        <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+                                <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
                             </svg>
                             Publicado: <time datetime="{{datePublished}}">{{humanDate}}</time>
                         </p>
@@ -24,7 +24,7 @@
                         {{{description}}}
                     </div>
                     <nav class="readmore">
-                        <a itemprop="url" href="/posts/{{url}}">Leer Mas&nbsp;&raquo;</a>
+                        <a itemprop="url" href="{{{site_url}}}/posts/{{url}}">Leer Mas&nbsp;&raquo;</a>
                     </nav>
                     <meta itemprop="inLanguage"    content="ES_es">
                     <meta itemprop="datePublished" content="{{datePublished}}">
@@ -41,5 +41,4 @@
                 | <a href="/posts/page/{{nextPage}}/">Siguiente &raquo;</a>
               {{/nextPage}}
             </nav>
-            
              </main>
