@@ -1,29 +1,66 @@
-    <main>
-                <article itemscope itemtype="http://schema.org/BlogPosting">
-                    <meta itemprop="name" content="{{{title}}}">
-                    <meta itemprop="description" content="{{description}}">
-                    <meta itemprop="datePublished" content="{{datePublished}}" />
-                    <meta itemprop="dateModified" content="{{dateModified}}" />
-                    <meta itemprop="wordCount" content="{{wordCount}}">
-            <!--
-                    <meta itemprop="keywords" content="go,golang,hugo,development," />
-            -->
-                    <header>
-                        <h1 itemprop="headline">{{{title}}}</h1>
-                        <p class="muted">
-                            <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-                                <circle cx="16" cy="16" r="14" />
-                                <path d="M16 8 L16 16 20 20" />
-                            </svg>
-                            <span>{{readingTime}} de lectura</span>
-                            <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-                                <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
-                            </svg>
-                            Publicado: <time datetime="{{datePublished}}">{{humanDate}}</time>
-                        </p>
-                    </header>
-                    <div itemprop="articleBody">
-                           {{{articleBody}}}
-                    </div>
-                </article>
-            </main>
+<main>
+    <article itemscope itemtype="http://schema.org/BlogPosting" id="{{url}}">
+        <meta itemprop="name"             content="{{{title}}}">
+        <meta itemprop="description"      content="{{description}}">
+        <meta itemprop="datePublished"    content="{{datePublished}}" />
+        <meta itemprop="dateModified"     content="{{dateModified}}" />
+        <meta itemprop="wordCount"        content="{{wordCount}}">
+        <meta itemprop="image"            content="https://vitronic.me/img/Master-Vitronic.png">
+        <meta itemprop="mainEntityOfPage" content="https://vitronic.me/{{url}}"/>
+        <meta itemprop="url"              content="https://vitronic.me/{{url}}" />
+        <div style="display: none;" itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <meta itemprop="url" content="https://vitronic.me/" />
+            <meta itemprop="name" content="{{{author}}}" />
+            <meta itemprop="image" content="https://vitronic.me/img/Master-Vitronic.png" />
+        </div>
+        <div style="display: none;" itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+            <meta itemprop="name" content="{{author}}" />
+            <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+                <meta itemprop="url" content="https://vitronic.me/img/Master-Vitronic.png" />
+            </div>
+        </div>
+       <!--<meta itemprop="keywords"         content="go,golang,hugo,development," /> -->
+        <header>
+            <h1 itemprop="headline">{{{title}}}</h1>
+            <p class="muted">
+                <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+                    <circle cx="16" cy="16" r="14" />
+                    <path d="M16 8 L16 16 20 20" />
+                </svg>
+                <span>{{readingTime}} de lectura</span>
+                <svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+                    <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
+                </svg> Publicado: <time datetime="{{datePublished}}">{{humanDate}}</time>
+            </p>
+        </header>
+        <div itemprop="articleBody">
+            {{{articleBody}}}
+        </div>
+        <hr>
+        <p>
+            Publicado por
+            <span><a href="/resume">{{author}}</a></span> en
+            <time>{{humanDate}}</time> en
+            <span itemprop="articleSection">
+               <a href="">Development</a> y
+               <a href="">golang</a>
+            </span> y etiquetado como
+            <a href="">development</a>,
+            <a href="">go</a>,
+            <a href="">golang</a> y
+            <a href="">hugo</a> ,se usaron 
+            <span>{{wordCount}}</span> palabras.
+        </p>
+        <aside>
+            <header>Contenido Relacionado:</header>
+            <ul>
+                <li>
+                    <a href="">(Hu)go Template Primer</a>
+                </li>
+                <li>
+                    <a href="">(Hu)go Template Primer</a>
+                </li>
+            </ul>
+        </aside>       
+    </article>
+</main>

@@ -31,18 +31,15 @@
                     <meta itemprop="dateModified"  content="{{dateModified}}">
                 </article>
             {{/pages}}
-
-<hr>
+              <hr>
               <nav>
-              
+              <span>Página {{currentPage}} de {{totalPages}}</span>              
               {{#prevPage}}
-                <a href="/posts/page/{{prevPage}}/">Anterior &laquo;</a> |
+                <a href="/posts/page/{{prevPage}}/">Anterior &laquo;</a> 
               {{/prevPage}}            
-                <span>Página {{currentPage}} de {{totalPages}}</span>
               {{#nextPage}}
                 | <a href="/posts/page/{{nextPage}}/">Siguiente &raquo;</a>
               {{/nextPage}}
-              
             </nav>
             
              </main>

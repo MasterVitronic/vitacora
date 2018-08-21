@@ -173,7 +173,7 @@ class posts {
                         'title'         => $valor->title,
                         'description'   => $valor->description,
                         'datePublished' => date("c",strtotime($valor->datePublished)),
-                        'humanDate'     => date("d M, Y",strtotime($valor->datePublished)),
+                        'humanDate'     => $this->humanDate($valor->datePublished),
                         'dateModified'  => date("c",strtotime($valor->dateModified)),
                         'wordCount'     => $this->wordCount($valor->articleBody),
                         'author'        => $valor->fullname,
@@ -208,11 +208,12 @@ class posts {
         $result = $this->cbd->get_row($sql);
         if ($result) {
             $data = [
+                'url'           => $result->url,
                 'title'         => $result->title,
                 'description'   => $result->description,
                 'articleBody'   => $result->articleBody,
                 'datePublished' => date("c",strtotime($result->datePublished)),
-                'humanDate'     => date("d M, Y",strtotime($result->datePublished)),
+                'humanDate'     => $this->humanDate($result->datePublished),
                 'dateModified'  => date("c",strtotime($result->dateModified)),
                 'wordCount'     => $this->wordCount($result->articleBody),
                 'author'        => $result->fullname,
@@ -222,7 +223,18 @@ class posts {
         }
         return false;
     }
-
+    
+    /**
+     * Método humanDate
+     *
+     *
+     * Retorna la fecha en formato humano
+     */    
+    public function humanDate($datetime) {
+         $date = spanishdate($datetime);
+         return sprintf('%d de %s, %d', $date->fecha, $date->mes,$date->anio);
+    }
+    
     /**
      * Método notFount
      *

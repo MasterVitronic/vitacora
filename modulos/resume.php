@@ -67,7 +67,8 @@ $meta = [
     'guachi_version'    => GUACHI_VERSION,
     'lang'              => $lang,
     'css'               => [
-                        ['css' => 'dark.min.css'],
+                        ['css' => 'themes/hack/hack.css'],
+                        ['css' => 'themes/hack/dark.css'],
                         ['css' => 'site.css']
     ],
     /*SEO*/
@@ -127,7 +128,6 @@ $pagina                 = $mustache->loadTemplate('pagina');
 $metadata               = $mustache->loadTemplate('metadata');
 /*En este caso el body va aqui*/
 $body                   = $mustache->loadTemplate('paginas/resume/index');
-
 
 /*seteo una cache de 1 hora*/
 $guachi->set_cache_header();

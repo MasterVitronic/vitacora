@@ -67,7 +67,8 @@ $meta = [
     'guachi_version'    => GUACHI_VERSION,
     'lang'              => $lang,
     'css'               => [
-                        ['css' => 'dark.min.css'],
+                        ['css' => 'themes/hack/hack.css'],
+                        ['css' => 'themes/hack/dark.css'],
                         ['css' => 'site.css']
     ],
     /*SEO*/
