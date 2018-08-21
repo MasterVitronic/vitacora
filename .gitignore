@@ -2,3 +2,5 @@ vitacora.db
 vitacora.shm
 vitacora.wal
 /cache_sql/
+/extras/pruebas/
+
