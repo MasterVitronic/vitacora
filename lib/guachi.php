@@ -58,7 +58,7 @@ function spanishdate($date) {
         'mes'   => $spanish['mes'][date('n',strtotime($date))],
         'fecha' => date('j',strtotime($date)),
         'anio'  => date('Y',strtotime($date)),
-        'hora'  => date('h:i:s',strtotime($date))
+        'hora'  => date('h:i:s A',strtotime($date))
     ];
 } 
 

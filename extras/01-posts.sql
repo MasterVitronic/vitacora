@@ -99,3 +99,6 @@ create unique index comments_id_comment on comments (id_comment);
 -- inner join categories       on (posts_categories.id_category= categories.id_category)
 -- where categories.category='Tecnología';
 
+select name,comment,datePublished from comments
+inner join posts on (posts.id_post=comments.id_post)
+where posts.url='1';

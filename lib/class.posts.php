@@ -153,49 +153,6 @@ class posts {
     }
 
     /**
-     * Método getTags
-     *
-     * Retorna las etiquetas de el posts
-     */
-    private function getTags($url) {
-        $sql = "select tag from tags "
-                ."join posts_tagged on (posts_tagged.id_tag=tags.id_tag) "
-                ."join posts        on (posts.id_post=posts_tagged.id_post) "
-                ."where posts.url='$url' and status='t' ";
-        $results = $this->cbd->get_results($sql);
-        if ($results) {
-            foreach ($results as $campo => $valor) {
-                $data[]=[
-                    'tag'=>$valor->tag
-                ];
-            }
-            return $data;
-        }
-        return false;        
-    }
-    
-    /**
-     * Método getCategories
-     *
-     * Retorna las categorias de el posts
-     */
-    public function getCategories($url) {
-        $sql = "select category from categories "
-                ."join posts_categories on (posts_categories.id_category=categories.id_category) "
-                ."join posts            on (posts.id_post=posts_categories.id_post) "
-                ."where posts.url='$url' and status='t' ";
-        $results = $this->cbd->get_results($sql);
-        if ($results) {
-            foreach ($results as $campo => $valor) {
-                $data[]=[
-                    'category'=>$valor->category
-                ];
-            }
-            return $data;
-        }
-        return false;
-    }        
-    /**
      * Método getPages
      *
      * Retorna el contanido para paginar
@@ -238,6 +195,81 @@ class posts {
         return false;
     }
 
+
+    /**
+     * Método getComments
+     *
+     * Retorna los comentarios de un posts
+     */
+    private function getComments($url) {
+        /*@TODO despues corrijo esta redundancia*/
+        function humanDate($datetime) {
+             $date = spanishdate($datetime);
+             return sprintf('%d de %s, %d a las %s', $date->fecha, $date->mes,$date->anio, $date->hora);
+        }
+        $sql = "select name,comment,comments.datePublished "
+              ."from comments "
+              ."inner join posts on (posts.id_post=comments.id_post) "
+              ."where posts.url='$url' ";
+        $results = $this->cbd->get_results($sql);
+        if ($results) {
+            foreach ($results as $campo => $valor) {
+                $data[]=[
+                        'initial'       => ucfirst(substr($valor->name,0, 1)),
+                        'name'          => $valor->name,
+                        'comment'       => $valor->comment,
+                        'datePublished' => humanDate($valor->datePublished)
+                ];
+            }
+            return $data;
+        }
+        return false;        
+    }
+    
+    /**
+     * Método getTags
+     *
+     * Retorna las etiquetas de el posts
+     */
+    private function getTags($url) {
+        $sql = "select tag from tags "
+                ."join posts_tagged on (posts_tagged.id_tag=tags.id_tag) "
+                ."join posts        on (posts.id_post=posts_tagged.id_post) "
+                ."where posts.url='$url' and status='t' ";
+        $results = $this->cbd->get_results($sql);
+        if ($results) {
+            foreach ($results as $campo => $valor) {
+                $data[]=[
+                     'tag'=>$valor->tag
+                ];
+            }
+            return $data;
+        }
+        return false;        
+    }
+    
+    /**
+     * Método getCategories
+     *
+     * Retorna las categorias de el posts
+     */
+    public function getCategories($url) {
+        $sql = "select category from categories "
+                ."join posts_categories on (posts_categories.id_category=categories.id_category) "
+                ."join posts            on (posts.id_post=posts_categories.id_post) "
+                ."where posts.url='$url' and status='t' ";
+        $results = $this->cbd->get_results($sql);
+        if ($results) {
+            foreach ($results as $campo => $valor) {
+                $data[]=[
+                     'category'=>$valor->category
+                ];
+            }
+            return $data;
+        }
+        return false;
+    }
+    
     /**
      * Método getContent
      *
@@ -251,6 +283,9 @@ class posts {
               ."where posts.url='$url'";
         $result = $this->cbd->get_row($sql);
         if ($result) {
+            $category = $this->getCategories($result->url);
+            $tag      = $this->getTags($result->url);
+            $comment  = $this->getComments($result->url);
             $data = [
                 'site_url'      => site_url,
                 'url'           => $result->url,
@@ -263,8 +298,12 @@ class posts {
                 'wordCount'     => $this->wordCount($result->articleBody),
                 'author'        => $result->fullname,
                 'readingTime'   => $this->readingTime($result->articleBody),
-                'categories'    => $this->getCategories($result->url),
-                'tags'          => $this->getTags($result->url)
+                'in_category'   => ($category) ? 't' : '',
+                'category'      =>  $category,
+                'in_tag'        => ($tag)      ? 't' : '',
+                'tag'           =>  $tag,
+                'in_comment'    => ($comment)  ? 't' : '',
+                'comment'       =>  $comment
             ];
             return $data;
         }

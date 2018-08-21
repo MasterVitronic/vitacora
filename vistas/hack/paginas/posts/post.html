@@ -40,19 +40,24 @@
         <p>
             Publicado por
             <span><a href="/resume">{{author}}</a></span> el
-            <time>{{humanDate}}</time> en
-            {{#categories}}
-            <span itemprop="articleSection">
-               <a href="">{{category}}</a>,
-            </span>
-            {{/categories}}
-             y etiquetado como
-             {{#tags}}
-            <a href="">{{tag}}</a>,
-            {{/tags}}
+            <time>{{humanDate}}</time>
+            {{#in_category}}
+                 en
+                {{#category}}
+                <span itemprop="articleSection">
+                   <a href="">{{category}}</a>,
+                </span>
+                {{/category}}
+            {{/in_category}}
+             {{#in_tag}}
+                y etiquetado como
+                 {{#tag}}
+                <a href="">{{tag}}</a>,
+                {{/tag}}
+            {{/in_tag}}
              se usaron 
             <span>{{wordCount}}</span> palabras.
-        </p>
+        </p>       
 <!--
         <aside>
             <header>Contenido Relacionado:</header>
@@ -67,4 +72,36 @@
         </aside>       
 -->
     </article>
+        <hr>
+        <form class="">
+          <fieldset class="">
+            <label for="username">NOMBRE:</label>
+            <input id="username" type="text" placeholder="Escriba su nombre" class="form-control" style="width: 100%;">
+          </fieldset>
+          <fieldset class="" style="margin-top: 10px;">
+            <label for="message">MENSAJE:</label>
+            <textarea id="message" placeholder="Escriba su mensaje" rows="5" class="form-control" style="width: 100%;"></textarea>
+          </fieldset>
+          <div class="" style="margin-top: 20px;">
+            <button type="button" class="btn btn-primary btn-block">Comentar</button>
+          </div>
+        </form>
+        {{#in_comment}}
+        <hr>
+        <h4>Comentarios</h4>
+            {{#comment}}
+                <div class="" style="margin-top: 20px;">
+                    <div class="media">
+                        <div class="media-left">
+                            <div class="avatarholder">{{initial}}</div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">{{name}}</div>
+                            <span class="resume-subtitle">{{datePublished}}</span>
+                            <div class="media-content">{{comment}}</div>
+                        </div>
+                    </div>
+                </div>                
+            {{/comment}}
+        {{/in_comment}}
 </main>
