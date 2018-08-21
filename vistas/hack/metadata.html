@@ -1,0 +1,92 @@
+<title>{{title}}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {{#css}}
+        <link rel="stylesheet"           href="/css/{{{css}}}">
+        {{/css}}
+        <link rel="canonical"            href="{{{canonical_url}}}">
+        <meta name="viewport"            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="generator"           content="Guachi (Lightweight and very simple php framework) v{{{guachi_version}}}">
+        <meta name="theme-color"         content="#000">
+        <meta name="referrer"            content="same-origin">
+        <meta name="description"         content="{{{descripcion}}}">
+        <meta name="author"              content="{{{author}}}">
+        {{#social_card}}
+        <!-- Open Graph data -->
+        <meta property="og:title"        content="{{{title}}}">
+        <meta property="og:type"         content="website">
+        <meta property="og:url"          content="{{{canonical_url}}}">
+        <meta property="og:image"        content="{{{image_card}}}">
+        <meta property="og:description"  content="{{{descripcion}}}">
+        <meta property="og:site_name"    content="{{{site_name}}}">
+        <meta property="og:locale"       content="{{lang}}">
+        <meta property="og:updated_time" content="{{{updated_time}}}"/>
+        <!-- Twiter card -->
+        <meta name="twitter:title"       content="{{{title}}}"/>
+        <meta name="twitter:description" content="{{{descripcion}}}"/>
+        <meta name="twitter:card"        content="summary"/>
+        <meta name="twitter:site"        content="{{{twitter}}}"/>
+        <meta name="twitter:image"       content="{{{image_card}}}"/>
+        <meta name="twitter:creator"     content="{{{twitter}}}"/>
+        <!-- Schema.org markup for Google+ --> 
+        <meta itemprop="name"            content="{{{title}}}"/>
+        <meta itemprop="description"     content="{{{descripcion}}}"/>
+        <meta itemprop="image"           content="{{{image_card}}}"/>
+        <!-- Google Authorship and Publisher Markup -->
+        <link rel="author"               href="{{google_p_author}}"/>
+        <link rel="publisher"            href="{{google_p_publisher}}"/>
+        {{/social_card}}
+        {{#google_verification}}
+        <!-- Google Site Verification -->
+        <meta name="google-site-verification" content="{{{google_verification}}}" />
+        {{/google_verification}}
+        <script type="application/ld+json">
+            {
+                "@context"  : "http://schema.org/",
+                "@type"     : "Person",
+                "name"      : "Díaz Devera Víctor Diex Gamar",
+                "gender"    : "Male",
+                "url"       : "https://vitronic.me/",
+                "image"     : "https://vitronic.me/img/Master-Vitronic.png",
+                "telephone" : "+58-288-442-0387",
+                "email"     : "mailto:vitronic2@gmail.com",
+                "jobTitle"  : "Software Engineer",
+                "address"   : {
+                        "@type"           : "PostalAddress",
+                        "streetAddress"   : "Avenida Valmore Rodríguez, Upata, Bolívar",
+                        "addressLocality" : "Upata",
+                        "addressRegion"   : "VE-F",
+                        "addressCountry"  : "VE",
+                        "postalCode"      : "8052"
+                    },
+                "sameAs": [
+                        "https://www.facebook.com/MasterVitronic",
+                        "https://www.youtube.com/channel/UClT_C_Bp9gJlK-0-eGCS9Hg",
+                        "https://www.linkedin.com/in/Master-Vitronic",
+                        "https://plus.google.com/+VíctorDiexDíazDevera",
+                        "https://twitter.com/MasterVitronic"
+                ]
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+              "@context"        : "http://schema.org",
+              "@type"           : "Organization",
+              "name"            : "Máster Vitronic",
+              "url"             : "https://vitronic.me/",
+              "logo"            : "https://vitronic.me/img/Master-Vitronic.png",
+              "contactPoint"    : [{
+                "@type"         : "ContactPoint",
+                "telephone"     : "+58-288-442-0387",
+                "contactType"   : "Customer Service",
+                "availableLanguage":"Spanish"
+              }]
+            }
+        </script>
+        <script type="application/ld+json">
+            {
+                "@context"  : "http://schema.org",
+                "@type"     : "WebSite",
+                "url"       : "https://vitronic.me/"
+            }
+        </script>        
