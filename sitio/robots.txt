@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
+Disallow: /posts
 Sitemap: https://vitronic.me/sitemap.xml
