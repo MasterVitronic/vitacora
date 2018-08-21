@@ -44,8 +44,8 @@ require_once ROOT . 'lib' . DS . 'class.mustache.php';
 
 /*Iniciamos todas las instancias*/
 $cbd            = new ezSQL_sqlite3(ROOT , sqlite_db);
-//$cbd            ->exec('PRAGMA journal_mode=wal;');
-//$cbd            ->exec('PRAGMA foreign_keys=ON;');
+$cbd            ->exec('PRAGMA journal_mode=wal;');
+$cbd            ->exec('PRAGMA foreign_keys=ON;');
 $crud           = crud::iniciar();
 $guachi         = guachi::iniciar();
 $limpiador      = limpiador::iniciar();

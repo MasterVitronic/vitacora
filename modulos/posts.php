@@ -14,6 +14,7 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 require_once(ROOT . 'lib' . DS . 'class.posts.php');
 /*inicializo la clase posts*/
 $posts = posts::iniciar();
+$posts->resultPerPage(1);
 
 /*La marca*/
 $brand                  = 'Máster Vitronic';
@@ -88,19 +89,20 @@ $metadata               = $mustache->loadTemplate('metadata');
 /*En este caso el body va aqui*/
 $body                   = $mustache->loadTemplate($posts->getTemplate());
 
-print_r($posts->isPage());
+//print_r($posts->getPages());
 
-/*Finalmente renderizo la pagina*/
+function comprimir($buffer) {
+    $busca = array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s');
+    $reemplaza = array('>', '<', '\\1');
+    return preg_replace($busca, $reemplaza, $buffer);
+}
+
+/*Finalmente rederizo la pagina*/
 print($pagina->render([
             'lang'          => $lang,
             'metadata'      => trim($metadata->render($meta)),
             'header'        => $mustache->loadTemplate('header'),
-            'body'          => $body->render([
-                'inLanguage'    => $lang,
-                'datePublished' => date("c",strtotime($datePublished)),
-                'dateModified'  => date("c",strtotime($dateModified)),
-                'body'          => $posts->getBody()
-            ]),
+            'body'          => $body->render($posts->getContent()),
             'footer'        => $mustache->loadTemplate('footer'),
             'js'            => $js
         ]
