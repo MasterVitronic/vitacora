@@ -43,11 +43,11 @@
             <time>{{humanDate}}</time>
             {{#in_category}}
                  en
-                {{#category}}
                 <span itemprop="articleSection">
+                {{#category}}
                    <a href="">{{category}}</a>,
-                </span>
                 {{/category}}
+                </span>
             {{/in_category}}
              {{#in_tag}}
                 y etiquetado como
@@ -73,35 +73,43 @@
 -->
     </article>
         <hr>
-        <form class="">
+        {{#warningExists}}
+            {{#warnings}}
+                <div class="alert alert-error">{{warning}}</div>
+            {{/warnings}}
+        {{/warningExists}}
+        <a name="new_comment"></a>
+        <form class="" action="#new_comment" method="post">
           <fieldset class="">
-            <label for="username">NOMBRE:</label>
-            <input id="username" type="text" placeholder="Escriba su nombre" class="form-control" style="width: 100%;">
+            <label for="name">NOMBRE:</label>
+            <input id="name" name="name" type="text" placeholder="Escriba su nombre" value="{{{name}}}" class="form-control" style="width: 100%;">
           </fieldset>
           <fieldset class="" style="margin-top: 10px;">
-            <label for="message">MENSAJE:</label>
-            <textarea id="message" placeholder="Escriba su mensaje" rows="5" class="form-control" style="width: 100%;"></textarea>
-          </fieldset>
-          <div class="" style="margin-top: 20px;">
-            <button type="button" class="btn btn-primary btn-block">Comentar</button>
+            <label for="comment">MENSAJE:</label>
+            <textarea id="comment" name="comment" value="{{{commentPost}}}" placeholder="Escriba su mensaje" rows="5" class="form-control" style="width: 100%;">{{{commentPost}}}</textarea>
+          </fieldset >
+          <div class="grid -right" style="margin-top: 20px;">
+            <a href="/posts" class="btn btn-primary">Volver</a>
+            <button type="submit" class="btn btn-success">Enviar</button>
           </div>
+          <input type="hidden" name="id_post" id="id_post" value="{{id_post}}"/>
         </form>
         {{#in_comment}}
         <hr>
         <h4>Comentarios</h4>
-            {{#comment}}
-                <div class="" style="margin-top: 20px;">
-                    <div class="media">
-                        <div class="media-left">
-                            <div class="avatarholder">{{initial}}</div>
-                        </div>
-                        <div class="media-body">
-                            <div class="media-heading">{{name}}</div>
-                            <span class="resume-subtitle">{{datePublished}}</span>
-                            <div class="media-content">{{comment}}</div>
-                        </div>
-                    </div>
-                </div>                
-            {{/comment}}
+        {{#comment}}
+        <div class="" style="margin-top: 20px;">
+            <div class="media">
+                <div class="media-left">
+                    <div class="avatarholder">{{initial}}</div>
+                </div>
+                <div class="media-body">
+                    <div class="media-heading">{{name}}</div>
+                    <span class="resume-subtitle">{{datePublished}}</span>
+                    <div class="media-content">{{comment}}</div>
+                </div>
+            </div>
+        </div>                
+        {{/comment}}
         {{/in_comment}}
-</main>
+        </main>

@@ -19,6 +19,10 @@ class posts {
     private $limpiador;
     private $limit;
     private $perpage = 3;
+    private $Warnings ;
+    private $name = '';
+    private $commentPost = '';
+
     /**
      * Instancia para el patrón de diseño singleton (instancia única)
      * @var object instancia
@@ -43,7 +47,7 @@ class posts {
         $this->request      = $this->limpiador->recolectar($this->controlador->get_modulo(),tipo_db,true);
         $this->limit        = '';
     }
-    
+
     /**
      * __destruct
      *
@@ -54,7 +58,7 @@ class posts {
     public function __destruct() {
 
     }
-    
+
     /**
      * Inicia la instancia de la clase
      * @return object
@@ -65,7 +69,7 @@ class posts {
         }
         return self::$instancia;
     }
-    
+
     /**
      * Método magico __clone
      */
@@ -73,7 +77,7 @@ class posts {
         trigger_error('Operación Invalida:' .
                 ' clonación no permitida', E_USER_ERROR);
     }
-    
+
     /**
      * Método magico __wakeup
      */
@@ -84,6 +88,33 @@ class posts {
     }
 
     /**
+     * Método Warnings
+     *
+     * Establece mensajes de error a mostrar luego de una peticion POST
+     */
+    public function Warnings($errs) {
+        $this->Warnings = $errs;
+    }
+
+    /**
+     * Método setNameOfComment
+     *
+     * Establece el value del campo name en el formulario de comentarios
+     */
+    public function setNameOfComment($name) {
+        $this->name = $name;
+    }
+
+    /**
+     * Método setComment
+     *
+     * Establece el comentario del formulario de comentarios
+     */
+    public function setComment($comment) {
+        $this->commentPost = $comment;
+    }
+    
+    /**
      * Método resultPerPage
      *
      * Setea los resultados por pagina 
@@ -91,7 +122,7 @@ class posts {
     public function resultPerPage($num) {
         $this->perpage = $num;
     }
-    
+
     /**
      * Método isPage
      *
@@ -120,7 +151,7 @@ class posts {
         }
         return false;
     }
-    
+
     /**
      * Método isPost
      *
@@ -195,7 +226,6 @@ class posts {
         return false;
     }
 
-
     /**
      * Método getComments
      *
@@ -210,22 +240,23 @@ class posts {
         $sql = "select name,comment,comments.datePublished "
               ."from comments "
               ."inner join posts on (posts.id_post=comments.id_post) "
-              ."where posts.url='$url' ";
+              ."where posts.url='$url' "
+              ."order by id_comment desc ";
         $results = $this->cbd->get_results($sql);
         if ($results) {
             foreach ($results as $campo => $valor) {
                 $data[]=[
-                        'initial'       => ucfirst(substr($valor->name,0, 1)),
-                        'name'          => $valor->name,
-                        'comment'       => $valor->comment,
-                        'datePublished' => humanDate($valor->datePublished)
+                    'initial'       => ucfirst(substr($valor->name,0, 1)),
+                    'name'          => $valor->name,
+                    'comment'       => $valor->comment,
+                    'datePublished' => humanDate($valor->datePublished)
                 ];
             }
             return $data;
         }
         return false;        
     }
-    
+
     /**
      * Método getTags
      *
@@ -286,7 +317,9 @@ class posts {
             $category = $this->getCategories($result->url);
             $tag      = $this->getTags($result->url);
             $comment  = $this->getComments($result->url);
+            $warnings = $this->Warnings;
             $data = [
+                'id_post'       => $result->id_post,
                 'site_url'      => site_url,
                 'url'           => $result->url,
                 'title'         => $result->title,
@@ -303,7 +336,11 @@ class posts {
                 'in_tag'        => ($tag)      ? 't' : '',
                 'tag'           =>  $tag,
                 'in_comment'    => ($comment)  ? 't' : '',
-                'comment'       =>  $comment
+                'comment'       =>  $comment,
+                'warningExists' => ($warnings) ? 't' : '',
+                'warnings'      => $this->Warnings,
+                'name'          => $this->name,
+                'commentPost'   => $this->commentPost
             ];
             return $data;
         }
@@ -329,10 +366,10 @@ class posts {
      */    
     public function notFount() {
         /*el header 404*/
-        header("HTTP/1.0 404 Not Found");                    
+        header("HTTP/1.0 404 Not Found");
         return 'paginas/posts/404';       
     }
-    
+
     /**
      * Método get_request
      *
@@ -356,7 +393,7 @@ class posts {
             return 'paginas/posts/page';
         }
     }
-    
+
     /**
      * Método getContent
      *
@@ -371,7 +408,7 @@ class posts {
         }
         return $this->getPages();
     }
-        
+
     /**
      * Método wordCount
      *

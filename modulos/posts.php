@@ -14,7 +14,41 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 require_once(ROOT . 'lib' . DS . 'class.posts.php');
 /*inicializo la clase posts*/
 $posts = posts::iniciar();
-$posts->resultPerPage(1);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_reporting(0); //deshabilito los reportes de error
+    /*recolecto los datos y los sanitizo*/
+    $limpio = $limpiador->recolectar($_POST, tipo_db, true);
+    /*paso los datos a la clase crud*/
+    $crud->datos($limpio);
+    /*errores vacios de momento*/
+    $erros = [];
+    /*si falta el nombre registro el mensaje*/
+    if (!$limpio->name) {
+        array_push($erros,['warning' => 'Falta nombre']);
+    }
+    /*si falta el mensaje registro el mensaje*/
+    if (!$limpio->comment) {
+        array_push($erros,['warning' => 'Falta Mensaje']);
+    }
+    /*Si faltan datos envio el Warning*/
+    if ( empty($limpio->name) or empty($limpio->comment) ) {
+        $posts->Warnings($erros);
+        /*guardo los datos de envio y los envio a la clase posts*/
+        $posts->setNameOfComment($limpio->name);
+        $posts->setComment($limpio->comment);
+    }else{
+        $crud->crear_insert('comments');
+        if ($crud->query() === false) {
+            /*No se pudo registrar el comentario, registro el warning*/
+            array_push($erros,['warning' => 'ERROR: no se pudo registrar tu comentario']);
+            $posts->Warnings($erros);
+        }
+    }
+}
+
+/*establece los resultados por pagina*/
+$posts->resultPerPage(3);
 
 /*La marca*/
 $brand                  = 'Máster Vitronic';
