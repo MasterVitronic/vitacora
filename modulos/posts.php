@@ -97,9 +97,9 @@ $meta = [
     'guachi_version'    => GUACHI_VERSION,
     'lang'              => $lang,
     'css'               => [
-                        ['css' => 'themes/hack/hack.css'],
-                        ['css' => 'themes/hack/dark.css'],
-                        ['css' => 'site.css']
+                        ['css' => 'themes/public/hack/hack.css'],
+                        ['css' => 'themes/public/hack/dark.css'],
+                        ['css' => 'themes/public/hack/site.css']
     ],
     'google_verification'=> $google_verification,
     /*SEO*/
@@ -115,30 +115,26 @@ $meta = [
 ];
 /*Aqui van lo script javacript a usar*/
 $js = [
-    ['js'               => 'app.js']
+    ['js'               => 'themes/public/hack/app.js']
 ];
+/*@TODO normalizar esta variable*/
+$dirTheme = 'public'. DS . public_theme . DS ;
 /*La plantilla de la pagina*/
-$pagina                 = $mustache->loadTemplate('pagina');
+$pagina                 = $mustache->loadTemplate($dirTheme . 'page');
 /*La plantilla del metadata*/
-$metadata               = $mustache->loadTemplate('metadata');
+$metadata               = $mustache->loadTemplate($dirTheme . 'metadata');
 /*En este caso el body va aqui*/
-$body                   = $mustache->loadTemplate($posts->getTemplate());
+$body                   = $mustache->loadTemplate($dirTheme . $posts->getTemplate());
 
 //print_r($posts->getPages());
-
-function comprimir($buffer) {
-    $busca = array('/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s');
-    $reemplaza = array('>', '<', '\\1');
-    return preg_replace($busca, $reemplaza, $buffer);
-}
 
 /*Finalmente rederizo la pagina*/
 print($pagina->render([
             'lang'          => $lang,
             'metadata'      => trim($metadata->render($meta)),
-            'header'        => $mustache->loadTemplate('header'),
+            'header'        => $mustache->loadTemplate($dirTheme . 'header'),
             'body'          => $body->render($posts->getContent()),
-            'footer'        => $mustache->loadTemplate('footer'),
+            'footer'        => $mustache->loadTemplate($dirTheme . 'footer'),
             'js'            => $js
         ]
 ));

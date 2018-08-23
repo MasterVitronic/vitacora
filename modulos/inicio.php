@@ -67,9 +67,9 @@ $meta = [
     'guachi_version'    => GUACHI_VERSION,
     'lang'              => $lang,
     'css'               => [
-                        ['css' => 'themes/hack/hack.css'],
-                        ['css' => 'themes/hack/dark.css'],
-                        ['css' => 'site.css']
+                        ['css' => 'themes/public/hack/hack.css'],
+                        ['css' => 'themes/public/hack/dark.css'],
+                        ['css' => 'themes/public/hack/site.css']
     ],
     /*SEO*/
     'google_verification'=> $google_verification,
@@ -120,14 +120,16 @@ $meta = [
 ];
 /*Aqui van lo script javacript a usar*/
 $js = [
-    ['js'               => 'app.js']
+    ['js'               => 'themes/public/hack/app.js']
 ];
+/*@TODO normalizar esta variable*/
+$dirTheme = 'public'. DS . public_theme . DS ;
 /*La plantilla de la pagina*/
-$pagina                 = $mustache->loadTemplate('pagina');
+$pagina                 = $mustache->loadTemplate($dirTheme . 'page');
 /*La plantilla del metadata*/
-$metadata               = $mustache->loadTemplate('metadata');
+$metadata               = $mustache->loadTemplate($dirTheme . 'metadata');
 /*En este caso el body va aqui*/
-$body                   = $mustache->loadTemplate('paginas/inicio/index');
+$body                   = $mustache->loadTemplate($dirTheme . 'inicio/main');
 
 /*seteo una cache de 1 hora*/
 $guachi->set_cache_header();
@@ -135,13 +137,13 @@ $guachi->set_cache_header();
 print($pagina->render([
             'lang'          => $lang,
             'metadata'      => trim($metadata->render($meta)),
-            'header'        => $mustache->loadTemplate('header'),
+            'header'        => $mustache->loadTemplate($dirTheme . 'header'),
             'body'          => $body->render([
                 'inLanguage'    => $lang,
                 'datePublished' => date("c",strtotime($datePublished)),
                 'dateModified'  => date("c",strtotime($dateModified)),
             ]),
-            'footer'        => $mustache->loadTemplate('footer'),
+            'footer'        => $mustache->loadTemplate($dirTheme . 'footer'),
             'js'            => $js
         ]
 ));

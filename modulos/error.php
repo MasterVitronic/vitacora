@@ -59,9 +59,9 @@ $meta = [
     'guachi_version'    => GUACHI_VERSION,
     'lang'              => $lang,
     'css'               => [
-                        ['css' => 'themes/hack/hack.css'],
-                        ['css' => 'themes/hack/dark.css'],
-                        ['css' => 'site.css']
+                        ['css' => 'themes/public/hack/hack.css'],
+                        ['css' => 'themes/public/hack/dark.css'],
+                        ['css' => 'themes/public/hack/site.css']
     ],
     'google_verification'=> $google_verification,
     /*SEO*/
@@ -77,7 +77,7 @@ $meta = [
 ];
 /*Aqui van lo script javacript a usar*/
 $js = [
-    ['js'               => 'app.js']
+    ['js'               => 'themes/public/hack/app.js']
 ];
 
 /*La plantilla de la pagina*/

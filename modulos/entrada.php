@@ -17,10 +17,8 @@ $lang                   = 'ES_es';
 /*la url de la pagina*/
 $url                    = 'https://vitronic.me/';
 
-/*token de verificacion de google*/
-$google_verification    = '5dXdklSHSv7lvP6zLqMM6orNsubDgnI0M24jdnnYnQw';
 /*descripcion de la pagina*/
-$descripcion            = 'Resumen Curricular de Díaz Devera Víctor Diex Gamar';
+$descripcion            = 'Entrada de administracion a Vitacora';
 
 /*schema.org*/
 $name                   = 'Díaz Devera Víctor Diex Gamar';
@@ -60,54 +58,18 @@ $dateModified           = '2018-08-19 12:51';
 
 /*Aqui van los datos de la plantilla metadata*/
 $meta = [
-    'title'             => 'Resumen Curricular | Máster Vitronic',
-    'descripcion'       => 'Habilidades, Capacidades y destrezas | Máster Vitronic',
+    'title'             => 'Entrada de Administración | Vitacora',
+    'descripcion'       => $descripcion,
     'author'            => $brand,
-    'canonical_url'     => $url.'resume',
+    'canonical_url'     => $url.'contact',
     'guachi_version'    => GUACHI_VERSION,
     'lang'              => $lang,
     'css'               => [
-                        ['css' => 'themes/public/hack/hack.css'],
-                        ['css' => 'themes/public/hack/dark.css'],
-                        ['css' => 'themes/public/hack/site.css']
+                        ['css' => 'themes/hack/hack.css'],
+                        ['css' => 'themes/hack/dark.css'],
+                        ['css' => 'site.css']
     ],
     /*SEO*/
-    'google_verification'=> $google_verification,
-    'schemas'   =>[
-                    'person'        =>[
-                        'name'      => $name,
-                        'url'       => $url,
-                        'image'     => $image,
-                        'gender'    => 'Male',
-                        'telephone' => $telephone,
-                        'email'     => $email,
-                        'jobTitle'  => $job,
-                        'streetAddress'  =>$streetAddress,
-                        'addressLocality'=>$addressLocality,
-                        'addressRegion'  =>$addressRegion,
-                        'addressCountry' =>$addressCountry,
-                        'postalCode'     =>$postalCode,
-                        'sameAs'    => 'yes',
-                        'networks'  => [
-                            ['net'  => '"'.$url_facebook.'",' ],
-                            ['net'  => '"'.$url_youtube.'",' ],
-                            ['net'  => '"'.$url_linkedin.'",' ],
-                            ['net'  => '"'.$url_googlep.'",' ],
-                            ['net'  => '"'.$url_twitter.'"' ]
-                        ]
-                ],
-                'organization' =>[
-                    'name'              => $brand,
-                    'url'               => $url,
-                    'image'             => $image,
-                    'telephone'         => $telephone,
-                    'contactType'       => 'Customer Service',
-                    'availableLanguage' => 'Spanish'
-                ],
-                'webSite' =>[
-                    'url' => $url
-                ]
-    ],
     'social_card' =>[
                     'og_type'           => $page_type,
                     'twitter'           => $twitter,
@@ -120,16 +82,14 @@ $meta = [
 ];
 /*Aqui van lo script javacript a usar*/
 $js = [
-    ['js'               => 'themes/public/hack/app.js']
+    ['js'               => 'app.js']
 ];
-/*@TODO normalizar esta variable*/
-$dirTheme = 'public'. DS . public_theme . DS ;
 /*La plantilla de la pagina*/
-$pagina                 = $mustache->loadTemplate($dirTheme . 'page');
+$pagina                 = $mustache->loadTemplate('pagina');
 /*La plantilla del metadata*/
-$metadata               = $mustache->loadTemplate($dirTheme . 'metadata');
+$metadata               = $mustache->loadTemplate('metadata');
 /*En este caso el body va aqui*/
-$body                   = $mustache->loadTemplate($dirTheme . 'resume/main');
+$body                   = $mustache->loadTemplate('modulos/entrada/index');
 
 /*seteo una cache de 1 hora*/
 $guachi->set_cache_header();
@@ -137,13 +97,13 @@ $guachi->set_cache_header();
 print($pagina->render([
             'lang'          => $lang,
             'metadata'      => trim($metadata->render($meta)),
-            'header'        => $mustache->loadTemplate($dirTheme . 'header'),
+            'header'        => $mustache->loadTemplate('header'),
             'body'          => $body->render([
                 'inLanguage'    => $lang,
                 'datePublished' => date("c",strtotime($datePublished)),
                 'dateModified'  => date("c",strtotime($dateModified)),
             ]),
-            'footer'        => $mustache->loadTemplate($dirTheme . 'footer'),
+            'footer'        => $mustache->loadTemplate('footer'),
             'js'            => $js
         ]
 ));

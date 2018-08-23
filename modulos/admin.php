@@ -11,18 +11,15 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 */
 
 
-return;
-
-//paranoia();
-//if($auth->is_logged() === false){exit();}
-//if (isset($get_modulo['arg'])) {
-    //if ($get_modulo['arg1']) {
-        //$dir = ROOT . 'modulos' . DS . $get_modulo['arg'];
-        //$file = $get_modulo['arg1'];
-    //}
-    //if (is_file($dir . DS . $file . '.php') === true) {
-        //require_once($dir . DS . $file . '.php');
-        //return;
-    //}
-//}
-
+/*Router*/
+if (isset($get_modulo['arg'])) {
+    $file = $get_modulo['arg'];
+    $dir = ROOT . 'modulos' . DS . 'admin' ;
+    if (is_file($dir . DS . $file . '.php') === true) {
+        require_once($dir . DS . $file . '.php');
+        return;
+    } else {
+        require_once( ROOT . DS . 'modulos' . DS . 'error.php');
+        return;
+    }
+}

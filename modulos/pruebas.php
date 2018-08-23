@@ -1,5 +1,31 @@
 <?php
 
+
+error_reporting(-1);   
+
+require_once(ROOT . 'lib'. DS . 'Markdownify' . DS . 'Converter.php');
+require_once(ROOT . 'lib'. DS . 'Markdownify' . DS . 'ConverterExtra.php');
+require_once(ROOT . 'lib'. DS . 'Markdownify' . DS . 'Parser.php');
+$converter = new Markdownify\Converter;
+
+
+require_once(ROOT . 'lib' . DS . 'class.parsedown.php');
+$Parsedown = new Parsedown();
+
+
+echo $Parsedown->text('Hello _Parsedown_!'); # prints: <p>Hello <em>Parsedown</em>!</p>
+echo PHP_EOL;
+// you can also parse inline markdown only
+echo $Parsedown->line('Hello _Parsedown_!'); # prints: Hello <em>Parsedown</em>!
+
+echo PHP_EOL;
+
+echo $converter->parseString($Parsedown->text('Hello _Parsedown_!'));
+
+
+
+return;
+
 $person=[
                 "@context"  => "http://schema.org/",
                 "@type"     => "Person",

@@ -16,7 +16,8 @@ define('ROOT', realpath(dirname(__FILE__)) .DS.'..'.DS);
 define('tipo_db','sqlite');
 define('sqlite_db','vitacora.db');
 define('modulo_inicio','inicio');
-define('tema','hack');
+define('public_theme','hack');
+define('admin_theme' ,'pure');
 define('site_url','https://vitronic.me');
 define('salt','@VNX@P@st3Ch@r3');
 define('default_date_timezone','America/Caracas');
@@ -55,7 +56,7 @@ $get_modulo     = $controlador->get_modulo();
 $auth           = auth::iniciar();
 $mustache       =  new Mustache_Engine(array(
     'loader'    => new Mustache_Loader_FilesystemLoader(
-                        ROOT . DS . 'vistas' . DS . tema,
+                        ROOT . DS . 'vistas',
                         ['extension' => '.html']
     )
 ));

@@ -62,3 +62,40 @@ function spanishdate($date) {
     ];
 } 
 
+/**
+ * getBrowser
+ *
+ * Intenta detectar el browser usado
+ */
+function getBrowser() {
+    function check_agent($agent) {
+        return (strpos($_SERVER['HTTP_USER_AGENT'], $agent) !== false) ;
+    }
+    $bowser = false;
+    if (check_agent('MSIE')) {
+        $bowser = 'IE';
+    }elseif (check_agent('Trident')) {
+        $bowser = 'IE';
+    }elseif (check_agent('Firefox')) {
+        $bowser = 'Firefox';
+    }elseif (check_agent('Chrome')) {
+        $bowser = 'Chrome';
+    }elseif (check_agent('Opera Mini')) {
+        $bowser = 'Opera';
+    }elseif (check_agent('Opera')) {
+        $bowser = 'Opera';
+    }elseif (check_agent('Safari')) {
+        $bowser = 'Safari';
+    }elseif (check_agent('Dillo')) {
+        $bowser = 'Dillo';
+    }elseif (check_agent('w3m')) {
+        $bowser = 'w3m';
+    }elseif (check_agent('Elinks')) {
+        $bowser = 'Elinks';
+    }elseif (check_agent('Links')) {
+        $bowser = 'Links';
+    }
+    return $bowser ;
+}
+
+

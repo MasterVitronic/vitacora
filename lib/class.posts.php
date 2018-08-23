@@ -367,7 +367,7 @@ class posts {
     public function notFount() {
         /*el header 404*/
         header("HTTP/1.0 404 Not Found");
-        return 'paginas/posts/404';       
+        return 'posts/404';       
     }
 
     /**
@@ -383,14 +383,14 @@ class posts {
                     if ($this->isPage() > $this->getTotalPages() ) {
                        return $this->notFount();
                     }
-                    return 'paginas/posts/page';
+                    return 'posts/page';
                 }elseif ($this->isPost()) {
-                    return 'paginas/posts/post';
+                    return 'posts/post';
                 }else{
                     return $this->notFount();
                 }
             }
-            return 'paginas/posts/page';
+            return 'posts/page';
         }
     }
 
