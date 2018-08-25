@@ -408,7 +408,7 @@ class article {
         $this->id_user = 1;
         $this->dataToSave = [
             'title'         => $data->title,
-            'url'           => trim(str_replace(' ', '',$data->url)),
+            'url'           => trim(str_replace(' ', '',strtolower($data->url))),
             'articleBody'   => $data->articleBody,
             'wordCount'     => $this->wordCount($data->articleBody),
             'id_post'       => $data->id_post
