@@ -2,7 +2,7 @@
 
 ![Logo][1]
 
-Vitacora (Vitronic Bitácora) es mi sitio web [vitronic.me][4], esta construido
+Vitacora (Vitronic Bitácora) es mi sitio web [vitronic.me][2], esta construido
 con Guachi , no es nada profesional ni busca serlo, lo hago y mantengo en mi
 tiempo libre, procuro hacer el código legible para que sea didáctico, intento 
 no rebuscar el código con paradigmas complicados para mantenerlo simple,
@@ -14,3 +14,4 @@ pues he usado mucho codigo reciclado de algunos proyectos en los que trabajo,
 espero algun dia terminarlo :-D.
 
 [1]: https://gitlab.com/vitronic/vitacora/raw/master/sitio/img/logo.png
+[2]: https://vitronic.me

@@ -13,12 +13,8 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 class auth {
 
     private $cbd;
-    private $guachi;
-    private $usuario;
-    private $contrasena;
-    private $id_perfil;
-    private $id_usuario;
-
+    private $username;
+    private $id_user;
 
     /**
      * Instancia para el patrón de diseño singleton (instancia única)
@@ -41,7 +37,6 @@ class auth {
         }
         global $cbd;
         $this->cbd = $cbd;
-        $this->guachi = guachi::iniciar();
     }
 
     /**
@@ -52,7 +47,7 @@ class auth {
      * @access public
      */
     public function __destruct() {
-        unset($this->cbd);
+
     }
 
     /**
@@ -82,124 +77,89 @@ class auth {
                 ' deserializar no esta permitido ' .
                 get_class($this) . " Class. ", E_USER_ERROR);
     }
-  
+
     /**
-     * metodo llave
+     * metodo key
      *
      * @access private
      */
-    private function llave($modo) {
-        switch ($modo) {
-            case 'cerrar':
+    private function key($mode) {
+        switch ($mode) {
+            case 'exit':
                 return (session_destroy()) ? true : false;
-            case 'entrar':
+            case 'login':
                 $_SESSION = [
-                    'usuario'       => $this->usuario,
-                    'token_sesion'  => $this->guachi->g_crc(),
-                    'id_perfil'     => $this->id_perfil,
-                    'id_usuario'    => $this->id_usuario
+                    'username'=> $this->username,
+                    'id_user' => $this->id_user
                 ];
-                $this->guachi->g_mensaje('ok');
                 return true;
         }
         return false;
     }
 
     /**
-     * metodo autenticacion
+     * metodo logIn
      *
      * @access public
      */
-    public function entrar($usuario, $contrasena) {
-        $this->contrasena = hash('whirlpool', $contrasena . $usuario . salt);
-        $sql =  'select id_usuario,estatus,id_perfil'
-                . " from auth.usuarios where usuario='$usuario'"
-                . " and contrasena='$this->contrasena'";
+    public function logIn($username, $password) {
+        $sql  =  'select id_user,status,password '
+                 ."from users where username='$username' and status = 't'";
         $consulta = $this->cbd->get_row($sql);
-        if (isset($consulta->id_usuario)) {
-            if ($consulta->estatus === 'f') {
-                $this->guachi->g_mensaje(gettext('Acceso revocado'), 'contrasena');
-                return;
-            }
-            $this->usuario      = $usuario;
-            $this->id_usuario   = $consulta->id_usuario;
-            $this->id_perfil    = $consulta->id_perfil;
-            $this->llave('entrar');
-        } else {
-            $this->guachi->g_mensaje(gettext('Acceso negado'), 'contrasena');
-            return;
+        if(password_verify($password , $consulta->password)){
+            $this->username  = $username;
+            $this->id_user   = $consulta->id_user;
+            $this->key('login');
         }
+        return false;
     }
 
     /**
-     * metodo salir
+     * metodo hashPass
      *
      * @access public
      */
-    public function salir() {
-        return $this->llave('cerrar') == true ? true : false;
+    public function hashPass($password) {
+        return  password_hash($password, PASSWORD_BCRYPT);
     }
 
     /**
-     * metodo mis_permisos
+     * metodo logOut
      *
      * @access public
      */
-    public function permisos($id_submodulo) {
-        $sql = 'select       auth.perfiles.id_perfil,'
-                .'           auth.permisos.lectura,'
-                .'           auth.permisos.escritura,'
-                .'           auth.permisos.borrado '
-                .'from       auth.usuarios '
-                .'inner join auth.horarios   on(auth.horarios.id_horario in (select unnest(auth.perfiles.ids_horarios))) '
-                .'inner join auth.perfiles   on(auth.perfiles.id_perfil=auth.usuarios.id_perfil) '
-                .'inner join auth.permisos   on(auth.permisos.id_perfil=auth.perfiles.id_perfil) '
-                .'inner join auth.submodulos on(auth.submodulos.id_submodulo=auth.permisos.id_submodulo) '
-                .'    where  auth.usuarios.estatus=true'
-                .'    and    auth.perfiles.estatus=true'
-                .'    and    auth.horarios.estatus=true'
-                ."    and    auth.submodulos.id_submodulo='$id_submodulo'"
-                ."    and    auth.usuarios.id_usuario='".$this->id_usuario()."'"
-                ."    and '".strftime('%H:%M',time())."' between auth.horarios.desde and auth.horarios.hasta "
-                ."limit 1 ";
-        $consulta = $this->cbd->get_row($sql);
-        return (object)[
-          'permiso'     =>  isset($consulta->id_perfil)                                  ? true : false,
-          'lectura'     => (isset($consulta->lectura)   and $consulta->lectura   == 't') ? true : false,
-          'escritura'   => (isset($consulta->escritura) and $consulta->escritura == 't') ? true : false,
-          'borrado'     => (isset($consulta->borrado)   and $consulta->borrado   == 't') ? true : false
-        ];
+    public function logOut() {
+        return $this->key('exit') == true ? true : false;
     }
-    
+
     /**
-     * metodo id_usuario
+     * metodo idUser
      *
      * @access public
      */
-    public function id_usuario() {
-        return isset($_SESSION['id_usuario']) ? intval($_SESSION['id_usuario']) : false;
+    public function idUser() {
+        return isset($_SESSION['id_user']) ? intval($_SESSION['id_user']) : false;
     }
-    
+
     /**
-     * metodo is_logged
+     * metodo isLogged
      *
      * @access public
      */
-    public function is_logged() {
-       return isset($_SESSION['id_usuario']);
+    public function isLogged() {
+       return isset($_SESSION['id_user']);
     }
-    
+
     /**
-     * metodo info_usuario
+     * metodo userInfo
      *
      * @access public
      */
-    public function info_usuario() {
-        if ( $this->is_logged() ) {
+    public function userInfo() {
+        if ( $this->isLogged() ) {
             return (object) [
-                'usuario'    => $_SESSION['usuario'],
-                'id_perfil'  => intval($_SESSION['id_perfil']),
-                'id_usuario' => intval($_SESSION['id_usuario'])
+                'username'  => $_SESSION['username'],
+                'id_user'   => intval($_SESSION['id_user'])
             ];
         }
         return false;

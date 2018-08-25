@@ -14,5 +14,5 @@ create table if not exists users( --Tabla usuarios
 );
 create unique index if not exists users_id_user  on users (id_user);
 create unique index if not exists users_username on users (username);
-insert into users (fullname,username,password)values('Máster Vitronic','vitronic','8df7f103d66d734e2f426656570d5bac725569f1c369f713c6ad300c9d31648afbd77c1906bb5be239165806a9fcfee739b4d7e05285de356703dc3ca6159693');
+insert into users (fullname,username,password)values('Máster Vitronic','vitronic','$2y$10$sAfhvt49gueW3u59eoJ30OMju6JFlFIS7SAu/dbFzuuWXJpN.yr7m');
 

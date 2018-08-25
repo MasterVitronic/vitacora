@@ -23,7 +23,7 @@ class article {
     private $perpage = 3;
     public  $Warnings = [] ;
     private $dirTheme = 'admin'. DS . admin_theme . DS ;
-    private $request = [];
+    public  $request = [];
     private $postId = false;
     private $id_user ;
     public  $dataToSave = [] ;
@@ -325,11 +325,11 @@ class article {
     }
 
     /**
-     * Método getRequest
+     * Método setRequest
      *
-     * Retorna el request
+     * setea el request
      */ 
-    public function getRequest() {
+    public function setRequest() {
         $request = isset($this->get->arg1) ? $this->get->arg1 : false;
         if( isset($request) ){
             $this->request = (object)[
@@ -379,7 +379,7 @@ class article {
      */    
     public function getTemplate() {
         if ( $this->get->arg === 'article' ) {
-            $this->getRequest();
+            $this->setRequest();
             $request = $this->request->mode ;
             if ( $request ) {
                 if ( $request === 'new' or $request === 'edit' ) {
@@ -462,6 +462,35 @@ class article {
     }
 
     /**
+     * Método toggleDraft
+     *
+     * togglea el status de post
+     */ 
+    public function toggleDraft($id_post){
+        $this->sql  = "select status from posts where id_post='$id_post'";
+        $status     = $this->cbd->get_var($this->sql);        
+        $this->dataToSave = [
+            'status'=> ($status === 't') ? 'f' : 't'
+        ];
+        /*lo primero es iniciar la transaccion*/
+        $this->cbd->beginTransaction();
+        /*result siempre es true a menos que algo salga mal*/
+        $result = true;
+        if(is_numeric($id_post)){
+            $this->sql_update('posts','id_post',$id_post);
+        }
+        if($this->cbd->exec($this->sql) === false){
+            $result = false;
+        }
+        if($result === true){
+            $this->cbd->commit();
+        }else{
+            $this->cbd->rollBack();
+        }
+        return $result;        
+    }
+
+    /**
      * Método getDescription
      *
      * Retorna la descripcion del post, recortando el texto total
@@ -520,8 +549,8 @@ class article {
                         'articleBody'   => $this->getDescription($valor->articleBody),
                         'image'         => $this->getFirstImage($valor->articleBody),
                         'humanDate'     => $this->humanDate($valor->datePublished),
-                        'dateModified'  => date("c",strtotime($valor->dateModified))
-                        
+                        'dateModified'  => date("c",strtotime($valor->dateModified)),
+                        'toogle_icon'   => ($valor->status === 'f') ? 'btn-primary fa fa-plus-square' : 'btn-error fa fa-minus-square'
                 ];
             }
             //$totalPages    = $this->getTotalPages();

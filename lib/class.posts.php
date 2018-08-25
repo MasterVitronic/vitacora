@@ -160,7 +160,7 @@ class posts {
     public function isPost() {
         $url = $this->getUrl();
         if( $url ){
-            $sql    = "select id_post from posts where url='$url'";
+            $sql    = "select id_post from posts where url='$url' and status='t' ";
             $result = $this->cbd->get_var($sql);
             if($result) {
                 return $result;

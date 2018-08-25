@@ -24,3 +24,7 @@
 .menu-nav .nav-item-footer {
     border-bottom: none;
 }
+
+img{
+    max-width: 100%;
+}

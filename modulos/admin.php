@@ -10,7 +10,11 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 <vitronic2@gmail.com>   <mastervitronic@vitronic.com.ve>
 */
 
-
+/*Debe estar logeado para acceder a este recurso*/
+if(!$auth->isLogged()){
+    header("Location: /entrada", true, 301);
+    return;
+}
 /*Router*/
 if (isset($get_modulo['arg'])) {
     $file = $get_modulo['arg'];

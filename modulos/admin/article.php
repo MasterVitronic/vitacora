@@ -14,7 +14,10 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 require_once(ROOT . 'lib' . DS . 'class.articles.php');
 /*inicializo la clase articles*/
 $article = article::iniciar();
+/*seteo el request*/
+$article->setRequest();
 
+/*acciones al guardar*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
     error_reporting(0); //deshabilito los reportes de error
     require_once(ROOT . 'lib' . DS . 'class.parsedown.php');
@@ -78,7 +81,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
+/*togglear el estatus de la publicacion*/
+if( $article->request->mode === 'toggle' ){
+    $article->toggleDraft($article->request->id);
+    header("Location: /admin/article", true, 301);
+    return;
+}
 
 /*Aqui van los datos de la plantilla metadata*/
 $meta = [
