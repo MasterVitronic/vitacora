@@ -18,7 +18,8 @@ create table posts(
     status              varchar(1)  not null check (status in ('f','t')) default 't', /*el estatus del post*/
     foreign key         (id_user)   references users(id_user)                         /*la clave foranea a users*/
 );
-create unique index posts_index on posts (title,datePublished);
+create unique index posts_url on posts (url);
+create unique index posts_title on posts (title);
 
 
 /*esta es la tabla de etiquetas*/
@@ -45,6 +46,7 @@ create table posts_tagged(
     foreign key         (id_post) references posts(id_post)                           /*la clave foranea a posts*/
 );
 create unique index posts_tagged_id_post_tagged on posts_tagged (id_post_tagged);
+create unique index posts_tagged_index          on posts_tagged (id_tag,id_post);
 
 
 
@@ -71,6 +73,7 @@ create table posts_categories(
     foreign key         (id_post) references posts(id_post)                           /*la clave foranea a posts*/
 );
 create unique index posts_categories_id_post_categories on posts_categories (id_post_categories);
+create unique index posts_categories_index              on posts_categories (id_category,id_post);
 
 
 
@@ -87,18 +90,11 @@ create table comments(
 );
 create unique index comments_id_comment on comments (id_comment);
 
-/*buscar por etiqueta*/
--- select title,description from posts
--- inner join posts_tagged on (posts_tagged.id_post  = posts.id_post)
--- inner join tags         on (posts_tagged.id_tag   = tags.id_tag)
--- where tags.tag='Lua';
 
-/*buscar por categoria*/
--- select title,description from posts
--- inner join posts_categories on (posts_categories.id_post    = posts.id_post)
--- inner join categories       on (posts_categories.id_category= categories.id_category)
--- where categories.category='Tecnología';
+select distinct categories.id_category,category,id_post from categories
+left outer join posts_categories on (posts_categories.id_category=categories.id_category)
+where 1=1 or id_post=1  group by categories.id_category;
 
-select name,comment,datePublished from comments
-inner join posts on (posts.id_post=comments.id_post)
-where posts.url='1';
+
+
+

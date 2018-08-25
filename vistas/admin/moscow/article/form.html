@@ -1,0 +1,47 @@
+<section>
+        <h1>Formulario</h1>
+        {{#warnings}}
+            <div class="alert alert-error">{{warning}}</div>
+        {{/warnings}}
+        <form class="" action="" method="post">
+          <fieldset class="" style="margin-top: 20px;">
+            <label for="title">TITULO:</label>
+            <input id="title" name="title" type="text" placeholder="Escriba el titulo del articulo" value="{{{title}}}" class="form-control" style="width: 100%;">
+          </fieldset>
+          <fieldset class="" style="margin-top: 20px;">
+            <label for="articleBody">ARTICULO:</label>
+            <textarea id="articleBody" name="articleBody" placeholder="Escriba su Articulo" style="width: 100%;">{{{articleBody}}}</textarea>
+          </fieldset>
+          <fieldset class="">
+              <div class="grid">
+                    <div class="cell -6of12" style="margin-top: 20px;">
+                        <select id="categories" name="categories[]" multiple="multiple"  class="form-control">
+                            {{#categories}}
+                                {{{category}}}
+                            {{/categories}}
+                        </select>
+                    </div>
+                    <div class="cell -6of12" style="margin-top: 20px;">
+                        <select id="tags" name="tags[]" multiple="multiple" class="form-control">
+                            {{#tags}}
+                                {{{tag}}}
+                            {{/tags}}
+                        </select>
+                    </div>
+                </div>
+          </fieldset>
+           <div class="grid">
+                <div class="cell -6of12" style="margin-top: 20px;">
+                  <fieldset class="">
+                    <label for="url">URL:</label>
+                    <input id="url" name="url" type="text" placeholder="Url donde estara disponible el articulo" value="{{{url}}}" class="form-control" style="width: 100%;">
+                  </fieldset>
+                </div>
+                <div class="cell -6of12 grid -right" style="margin-top: 20px;">
+                    <button type="button" class="btn btn-primary">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </div>
+           </div>
+          <input type="hidden" name="id_post" id="id_post" value="{{id_post}}"/>
+        </form>
+    </section>

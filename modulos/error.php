@@ -80,10 +80,12 @@ $js = [
     ['js'               => 'themes/public/hack/app.js']
 ];
 
+/*@TODO normalizar esta variable*/
+$dirTheme = 'public'. DS . public_theme . DS ;
 /*La plantilla de la pagina*/
-$pagina                 = $mustache->loadTemplate('pagina');
+$pagina                 = $mustache->loadTemplate($dirTheme . 'page');
 /*La plantilla del metadata*/
-$metadata               = $mustache->loadTemplate('metadata');
+$metadata               = $mustache->loadTemplate($dirTheme . 'metadata');
 /*En este caso el body va aqui*/
 /*el header 404*/
 header("HTTP/1.0 404 Not Found");
@@ -91,9 +93,9 @@ header("HTTP/1.0 404 Not Found");
 print($pagina->render([
             'lang'          => $lang,
             'metadata'      => trim($metadata->render($meta)),
-            'header'        => $mustache->loadTemplate('header'),
-            'body'          => $mustache->loadTemplate('modulos/error/error'),
-            'footer'        => $mustache->loadTemplate('footer'),
+            'header'        => $mustache->loadTemplate($dirTheme . 'header'),
+            'body'          => $mustache->loadTemplate($dirTheme . '404'),
+            'footer'        => $mustache->loadTemplate($dirTheme . 'footer'),
             'js'            => $js
         ]
 ));

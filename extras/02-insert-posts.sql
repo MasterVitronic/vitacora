@@ -6,11 +6,11 @@ PRAGMA journal_mode = WAL;--probar esto para tener algo de concurrencia
 insert into posts(id_user,title,url,description,articleBody)
 values(1,'Getting Started with Hugo','primera-publicacion.html'
 ,'Introducción Este tutorial le mostrará cómo crear un tema simple. Asumo que está familiarizado con HTML, la línea de comandos bash, y que se siente cómodo usando Markdown para formatear el contenido. Le explicaré cómo Hugo utiliza las plantillas y cómo puede organizarlas para crear un tema. No cubriré el uso de CSS para darle estilo a tu tema. con la creación de un nuevo sitio con una plantilla muy básica.',
-'<h2 id="step-1-install-hugo">Step 1. Install Hugo</h2>
+'<h2>Step 1. Install Hugo</h2>
 <p>Go to <a href="https://github.com/spf13/hugo/releases">Hugo releases</a> and download the appropriate version for your OS and architecture.</p>
 <p>Save it somewhere specific as we will be using it in the next step.</p>
 <p>More complete instructions are available at <a href="https://gohugo.io/getting-started/installing/">Install Hugo</a></p>
-<h2 id="step-2-build-the-docs">Step 2. Build the Docs</h2>
+<h2>Step 2. Build the Docs</h2>
 <p>Hugo has its own example site which happens to also be the documentation site you are reading right now.</p>
 <p>Follow the following steps:</p>
 <ol>
@@ -20,48 +20,79 @@ values(1,'Getting Started with Hugo','primera-publicacion.html'
 <li>Open your browser to <a href="http://localhost:1313">http://localhost:1313</a></li>
 </ol>
 <p>Corresponding pseudo commands:</p>
-<pre>
-<code class="lang-bash">
-git clone https://github.com/spf13/hugo
+<pre><code>git clone https://github.com/spf13/hugo
 cd hugo
 /path/to/where/you/installed/hugo server --source=./docs
 &gt; 29 pages created
 &gt; 0 tags index created
 &gt; in 27 ms
 &gt; Web Server is available at http://localhost:1313
-&gt; Press ctrl+c to stop
-</code>
-</pre>
-<p>Once you&rsquo;ve gotten here, follow along the rest of this page on your local build.</p>
-<h2 id="step-3-change-the-docs-site">Step 3. Change the docs site</h2>
+&gt; Press ctrl+c to stop</code></pre>
+<p>Once you’ve gotten here, follow along the rest of this page on your local build.</p>
+<h2>Step 3. Change the docs site</h2>
 <p>Stop the Hugo process by hitting Ctrl+C.</p>
 <p>Now we are going to run hugo again, but this time with hugo in watch mode.</p>
-<pre>
-<code class="lang-bash">
-/path/to/hugo/from/step/1/hugo server --source=./docs --watch
+<pre><code>/path/to/hugo/from/step/1/hugo server --source=./docs --watch
 &gt; 29 pages created
 &gt; 0 tags index created
 &gt; in 27 ms
 &gt; Web Server is available at http://localhost:1313
 &gt; Watching for changes in /Users/spf13/Code/hugo/docs/content
-&gt; Press ctrl+c to stop
-</code>
-</pre>
+&gt; Press ctrl+c to stop</code></pre>
 <p>Open your <a href="http://vim.spf13.com">favorite editor</a> and change one of the source content pages. How about changing this very file to <em>fix the typo</em>. How about changing this very file to <em>fix the typo</em>.</p>
-<p>Content files are found in <code>docs/content/</code>. Unless otherwise specified, files are located at the same relative location as the url, in our case
-<code>docs/content/overview/quickstart.md</code>.</p>
+<p>Content files are found in <code>docs/content/</code>. Unless otherwise specified, files are located at the same relative location as the url, in our case <code>docs/content/overview/quickstart.md</code>.</p>
 <p>Change and save this file.. Notice what happened in your terminal.</p>
-<pre>
-<code class="lang-bash">
-&gt; Change detected, rebuilding site
+<pre><code>&gt; Change detected, rebuilding site
 &gt; 29 pages created
 &gt; 0 tags index created
-&gt; in 26 ms
-</code>
-</pre>
+&gt; in 26 ms</code></pre>
 <p>Refresh the browser and observe that the typo is now fixed.</p>
-<p>Notice how quick that was. Try to refresh the site before it&rsquo;s finished building. I double dare you. Having nearly instant feedback enables you to have your creativity flow without waiting for long builds.</p>
-<h2 id="step-4-have-fun">Step 4. Have fun</h2>
+<p>Notice how quick that was. Try to refresh the site before it’s finished building. I double dare you. Having nearly instant feedback enables you to have your creativity flow without waiting for long builds.</p>
+<h2>Step 4. Have fun</h2>
+<p>The best way to learn something is to play with it." </p>
+<h2>Step 1. Install Hugo</h2>
+<p>Go to <a href="https://github.com/spf13/hugo/releases">Hugo releases</a> and download the appropriate version for your OS and architecture.</p>
+<p>Save it somewhere specific as we will be using it in the next step.</p>
+<p>More complete instructions are available at <a href="https://gohugo.io/getting-started/installing/">Install Hugo</a></p>
+<h2>Step 2. Build the Docs</h2>
+<p>Hugo has its own example site which happens to also be the documentation site you are reading right now.</p>
+<p>Follow the following steps:</p>
+<ol>
+<li>Clone the <a href="http://github.com/spf13/hugo">Hugo repository</a></li>
+<li>Go into the repo</li>
+<li>Run hugo in server mode and build the docs</li>
+<li>Open your browser to <a href="http://localhost:1313">http://localhost:1313</a></li>
+</ol>
+<p>Corresponding pseudo commands:</p>
+<pre><code>git clone https://github.com/spf13/hugo
+cd hugo
+/path/to/where/you/installed/hugo server --source=./docs
+&gt; 29 pages created
+&gt; 0 tags index created
+&gt; in 27 ms
+&gt; Web Server is available at http://localhost:1313
+&gt; Press ctrl+c to stop</code></pre>
+<p>Once you’ve gotten here, follow along the rest of this page on your local build.</p>
+<h2>Step 3. Change the docs site</h2>
+<p>Stop the Hugo process by hitting Ctrl+C.</p>
+<p>Now we are going to run hugo again, but this time with hugo in watch mode.</p>
+<pre><code>/path/to/hugo/from/step/1/hugo server --source=./docs --watch
+&gt; 29 pages created
+&gt; 0 tags index created
+&gt; in 27 ms
+&gt; Web Server is available at http://localhost:1313
+&gt; Watching for changes in /Users/spf13/Code/hugo/docs/content
+&gt; Press ctrl+c to stop</code></pre>
+<p>Open your <a href="http://vim.spf13.com">favorite editor</a> and change one of the source content pages. How about changing this very file to <em>fix the typo</em>. How about changing this very file to <em>fix the typo</em>.</p>
+<p>Content files are found in <code>docs/content/</code>. Unless otherwise specified, files are located at the same relative location as the url, in our case <code>docs/content/overview/quickstart.md</code>.</p>
+<p>Change and save this file.. Notice what happened in your terminal.</p>
+<pre><code>&gt; Change detected, rebuilding site
+&gt; 29 pages created
+&gt; 0 tags index created
+&gt; in 26 ms</code></pre>
+<p>Refresh the browser and observe that the typo is now fixed.</p>
+<p>Notice how quick that was. Try to refresh the site before it’s finished building. I double dare you. Having nearly instant feedback enables you to have your creativity flow without waiting for long builds.</p>
+<h2>Step 4. Have fun</h2>
 <p>The best way to learn something is to play with it.</p>'),
 (1,'(Hu)go Template Primer','segunda-publicacion.html',
 'Hugo uses the excellent Go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates. This document is a brief primer on using Go templates.',
@@ -75,7 +106,7 @@ similarities in Go templates.</p>
 <p>This document is a brief primer on using Go templates. The <a href="https://golang.org/pkg/html/template/">Go docs</a>
 provide more details.</p>
 
-<h2 id="introduction-to-go-templates">Introduction to Go Templates</h2>
+<h2 >Introduction to Go Templates</h2>
 
 <p>Go templates provide an extremely simple template language. It adheres to the
 belief that only the most basic of logic belongs in the template or view layer.
@@ -85,7 +116,7 @@ One consequence of this simplicity is that Go templates parse very quickly.</p>
 content will be sanitized depending on the context of where they are used. More
 details can be found in the <a href="https://golang.org/pkg/html/template/">Go docs</a>.</p>
 
-<h2 id="basic-syntax">Basic Syntax</h2>
+<h2 >Basic Syntax</h2>
 
 <p>Golang templates are HTML files with the addition of variables and
 functions.</p>
@@ -116,7 +147,7 @@ functions.</p>
 <pre><code>{{ if or (isset .Params &quot;alt&quot;) (isset .Params &quot;caption&quot;) }} Caption {{ end }}
 </code></pre>
 
-<h2 id="variables">Variables</h2>
+<h2 >Variables</h2>
 
 <p>Each Go template has a struct (object) made available to it. In hugo each
 template is passed either a page or a node struct depending on which type of
@@ -134,7 +165,7 @@ page you are rendering. More details are available on the
 {{ $address }}
 </code></pre>
 
-<h2 id="functions">Functions</h2>
+<h2>Functions</h2>
 
 <p>Go template ship with a few functions which provide basic functionality. The Go
 template system also provides a mechanism for applications to extend the
@@ -149,7 +180,7 @@ functions cannot be added without recompiling hugo.</p>
 <pre><code>{{ add 1 2 }}
 </code></pre>
 
-<h2 id="includes">Includes</h2>
+<h2 >Includes</h2>
 
 <p>When including another template you will pass to it the data it will be
 able to access. To pass along the current context please remember to
@@ -161,11 +192,11 @@ the /layout/ directory within Hugo.</p>
 <pre><code>{{ template &quot;chrome/header.html&quot; . }}
 </code></pre>
 
-<h2 id="logic">Logic</h2>
+<h2 >Logic</h2>
 
 <p>Go templates provide the most basic iteration and conditional logic.</p>
 
-<h3 id="iteration">Iteration</h3>
+<h3 >Iteration</h3>
 
 <p>Just like in Go, the Go templates make heavy use of range to iterate over
 a map, array or slice. The following are different examples of how to use
@@ -193,7 +224,7 @@ range.</p>
 {{ end }}
 </code></pre>
 
-<h3 id="conditionals">Conditionals</h3>
+<h3 >Conditionals</h3>
 
 <p>If, else, with, or, &amp; and provide the framework for handling conditional
 logic in Go Templates. Like range, each statement is closed with <code>end</code>.</p>
@@ -245,7 +276,7 @@ and skips the block if the variable is absent.</p>
 {{ end }}
 </code></pre>
 
-<h2 id="pipes">Pipes</h2>
+<h2 >Pipes</h2>
 
 <p>One of the most powerful components of Go templates is the ability to
 stack actions one after another. This is done by using pipes. Borrowed
@@ -293,7 +324,7 @@ Stuff Here
 {{ end }}
 </code></pre>
 
-<h2 id="context-aka-the-dot">Context (aka. the dot)</h2>
+<h2 >Context (aka. the dot)</h2>
 
 <p>The most easily overlooked concept to understand about Go templates is that {{ . }}
 always refers to the current context. In the top level of your template this
@@ -315,7 +346,7 @@ instead of depending on the context.</p>
 have defined a variable outside of the loop so we have access to it from within
 the loop.</p>
 
-<h1 id="hugo-parameters">Hugo Parameters</h1>
+<h1 >Hugo Parameters</h1>
 
 <p>Hugo provides the option of passing values to the template language
 through the site configuration (for sitewide values), or through the meta
@@ -323,7 +354,7 @@ data of each specific piece of content. You can define any values of any
 type (supported by your front matter/config format) and use them however
 you want to inside of your templates.</p>
 
-<h2 id="using-content-page-parameters">Using Content (page) Parameters</h2>
+<h2 >Using Content (page) Parameters</h2>
 
 <p>In each piece of content you can provide variables to be used by the
 templates. This happens in the <a href="https://themes.gohugo.io/theme/after-dark/content/front-matter">front matter</a>.</p>
@@ -355,13 +386,13 @@ notoc: true
   {{ end }}
 </code></pre>
 
-<h2 id="using-site-config-parameters">Using Site (config) Parameters</h2>
+<h2 >Using Site (config) Parameters</h2>
 
 <p>In your top-level configuration file (eg, <code>config.yaml</code>) you can define site
 parameters, which are values which will be available to you in chrome.</p>
 
 <p>For instance, you might declare:</p>
-<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">params:<span style="color:#bbb">
+<div ><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code  data-lang="yaml">params:<span style="color:#bbb">
 </span><span style="color:#bbb">  </span>CopyrightHTML:<span style="color:#bbb"> </span><span style="color:#b84">&#34;Copyright &amp;#xA9; 2013 John Doe. All Rights Reserved.&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>TwitterUser:<span style="color:#bbb"> </span><span style="color:#b84">&#34;spf13&#34;</span><span style="color:#bbb">
 </span><span style="color:#bbb">  </span>SidebarRecentLimit:<span style="color:#bbb"> </span><span style="color:#099">5</span></code></pre></div>
@@ -401,7 +432,7 @@ so, such as in this example:</p>
 ,'Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like ▾ <root>/ ▾ images/ logo.png should become ▾ <root>/ ▾ static/ ▾ images/ logo.png Additionally, you’ll want any files that should reside at the root (such as CNAME) to be moved to static. '
 ,
 '
-<h2 id="move-static-content-to-static">Move static content to <code>static</code></h2>
+<h2 >Move static content to <code>static</code></h2>
 
 <p>Jekyll has a rule that any directory not starting with <code>_</code> will be copied as-is to the <code>_site</code> output. Hugo keeps all static content under <code>static</code>. You should therefore move it all there.
 With Jekyll, something that looked like</p>
@@ -421,11 +452,11 @@ With Jekyll, something that looked like</p>
 
 <p>Additionally, you&rsquo;ll want any files that should reside at the root (such as <code>CNAME</code>) to be moved to <code>static</code>.</p>
 
-<h2 id="create-your-hugo-configuration-file">Create your Hugo configuration file</h2>
+<h2 >Create your Hugo configuration file</h2>
 
 <p>Hugo can read your configuration as JSON, YAML or TOML. Hugo supports parameters custom configuration too. Refer to the <a href="https://themes.gohugo.io/theme/after-dark/overview/configuration/">Hugo configuration documentation</a> for details.</p>
 
-<h2 id="set-your-configuration-publish-folder-to-site">Set your configuration publish folder to <code>_site</code></h2>
+<h2 >Set your configuration publish folder to <code>_site</code></h2>
 
 <p>The default is for Jekyll to publish to <code>_site</code> and for Hugo to publish to <code>public</code>. If, like me, you have <a href="http://blog.blindgaenger.net/generate_github_pages_in_a_submodule.html"><code>_site</code> mapped to a git submodule on the <code>gh-pages</code> branch</a>, you&rsquo;ll want to do one of two alternatives:</p>
 
@@ -447,17 +478,17 @@ git submodule add -b gh-pages git@github.com:your-username/your-repo.git public
 </code></pre></li>
 </ol>
 
-<h2 id="convert-jekyll-templates-to-hugo-templates">Convert Jekyll templates to Hugo templates</h2>
+<h2 >Convert Jekyll templates to Hugo templates</h2>
 
 <p>That&rsquo;s the bulk of the work right here. The documentation is your friend. You should refer to <a href="http://jekyllrb.com/docs/templates/">Jekyll&rsquo;s template documentation</a> if you need to refresh your memory on how you built your blog and <a href="https://themes.gohugo.io/theme/after-dark/layout/templates/">Hugo&rsquo;s template</a> to learn Hugo&rsquo;s way.</p>
 
 <p>As a single reference data point, converting my templates for <a href="http://heyitsalex.net/">heyitsalex.net</a> took me no more than a few hours.</p>
 
-<h2 id="convert-jekyll-plugins-to-hugo-shortcodes">Convert Jekyll plugins to Hugo shortcodes</h2>
+<h2 >Convert Jekyll plugins to Hugo shortcodes</h2>
 
 <p>Jekyll has <a href="http://jekyllrb.com/docs/plugins/">plugins</a>; Hugo has <a href="https://themes.gohugo.io/theme/after-dark/doc/shortcodes/">shortcodes</a>. It&rsquo;s fairly trivial to do a port.</p>
 
-<h3 id="implementation">Implementation</h3>
+<h3 >Implementation</h3>
 
 <p>As an example, I was using a custom <a href="https://github.com/alexandre-normand/alexandre-normand/blob/74bb12036a71334fdb7dba84e073382fc06908ec/_plugins/image_tag.rb"><code>image_tag</code></a> plugin to generate figures with caption when running Jekyll. As I read about shortcodes, I found Hugo had a nice built-in shortcode that does exactly the same thing.</p>
 
@@ -540,7 +571,7 @@ Liquid::Template.register_tag(''image'', Jekyll::ImageTag)
 &lt;!-- image --&gt;
 </code></pre>
 
-<h3 id="usage">Usage</h3>
+<h3 >Usage</h3>
 
 <p>I simply changed:</p>
 
@@ -554,17 +585,17 @@ Liquid::Template.register_tag(''image'', Jekyll::ImageTag)
 
 <p>As a bonus, the shortcode named parameters are, arguably, more readable.</p>
 
-<h2 id="finishing-touches">Finishing touches</h2>
+<h2 >Finishing touches</h2>
 
-<h3 id="fix-content">Fix content</h3>
+<h3 >Fix content</h3>
 
 <p>Depending on the amount of customization that was done with each post with Jekyll, this step will require more or less effort. There are no hard and fast rules here except that <code>hugo server --watch</code> is your friend. Test your changes and fix errors as needed.</p>
 
-<h3 id="clean-up">Clean up</h3>
+<h3 >Clean up</h3>
 
 <p>You&rsquo;ll want to remove the Jekyll configuration at this point. If you have anything else that isn&rsquo;t used, delete it.</p>
 
-<h2 id="a-practical-example-in-a-diff">A practical example in a diff</h2>
+<h2 >A practical example in a diff</h2>
 
 <p><a href="http://heyitsalex.net/">Hey, it&rsquo;s Alex</a> was migrated in less than a <em>father-with-kids day</em> from Jekyll to Hugo. You can see all the changes (and screw-ups) by looking at this <a href="https://github.com/alexandre-normand/alexandre-normand/compare/869d69435bd2665c3fbf5b5c78d4c22759d7613a...b7f6605b1265e83b4b81495423294208cc74d610">diff</a>.</p>')
 ;
@@ -574,6 +605,17 @@ Liquid::Template.register_tag(''image'', Jekyll::ImageTag)
 /*algunas tags*/
 insert into posts_tagged(id_post,id_tag)values(1,2);
 insert into posts_tagged(id_post,id_tag)values(1,3);
+
+
+select tags.id_tag,tag,id_post from tags
+left outer join posts_tagged on (posts_tagged.id_tag=tags.id_tag) 
+where 1=1 or id_post='0';
+
+
+select categories.id_category,category,id_post from categories
+left outer join posts_categories on (posts_categories.id_category=categories.id_category)
+where 1=1 or id_post='0';
+
 
 /*algunas categorias*/
 insert into posts_categories(id_post,id_category)values(1,1);

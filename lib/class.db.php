@@ -619,7 +619,12 @@
                  function lastInsertRowID()
                  {
                     return $this->dbh->lastInsertRowID();
-                 }                    
+                 }
+                 /*https://secure.php.net/manual/es/sqlite3.close.php*/
+                 function close()
+                 {
+                     $this->dbh->close();
+                 }                                  
 		/**********************************************************************
 		*  Perform SQLite query and try to detirmin result value
 		*/

@@ -1,18 +1,266 @@
+progress,
+sub,
+sup {
+    vertical-align: baseline
+}
+
+button,
+hr,
+input {
+    overflow: visible
+}
+
+pre,
+textarea {
+    overflow: auto
+}
+
+.hack h1,
+sub,
+sup {
+    position: relative
+}
+
+.hack hr:after,
+body {
+    word-wrap: break-word
+}
+
+.btn,
+a {
+    cursor: pointer
+}
+
+.container,
+aside,
+main {
+    max-width: 70rem
+}
+
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section,
+summary {
+    display: block
+}
+
+audio,
+canvas,
+progress,
+video {
+    display: inline-block
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0
+}
+
+[hidden],
+template {
+    display: none
+}
+
+a:active,
+a:hover {
+    outline-width: 0
+}
+
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+    text-decoration: underline dotted
+}
+
+b,
+strong {
+    font-weight: bolder
+}
+
+dfn {
+    font-style: italic
+}
+
+h1 {
+    font-size: 2em;
+    margin: .67em 0
+}
+
+mark {
+    background-color: #ff0;
+    color: #000
+}
+
+small {
+    font-size: 80%
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0
+}
+
+sub {
+    bottom: -.25em
+}
+
+sup {
+    top: -.5em
+}
+
+img {
+    border-style: none
+}
+
+svg:not(:root) {
+    overflow: hidden
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+    font-size: 1em
+}
+
+figure {
+    margin: 1em 40px
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0
+}
+
+*,
+.cell,
+legend {
+    box-sizing: border-box
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font: inherit;
+    margin: 0
+}
+
+optgroup {
+    font-weight: 700
+}
+
+button,
+select {
+    text-transform: none
+}
+
+[type=reset],
+[type=submit],
+button,
+html [type=button] {
+    -webkit-appearance: button
+}
+
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner,
+button::-moz-focus-inner {
+    border-style: none;
+    padding: 0
+}
+
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring,
+button:-moz-focusring {
+    outline: ButtonText dotted 1px
+}
+
+legend {
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal
+}
+
+[type=checkbox],
+[type=radio] {
+    box-sizing: border-box;
+    padding: 0
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+    height: auto
+}
+
+[type=search] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px
+}
+
+[type=search]::-webkit-search-cancel-button,
+[type=search]::-webkit-search-decoration {
+    -webkit-appearance: none
+}
+
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: .54
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit
+}
+
 html {
     font-size: 12px
 }
 
+.hack,
+.hack blockquote,
+.hack code,
+.hack em,
+.hack h1,
+.hack h2,
+.hack h3,
+.hack h4,
+.hack h5,
+.hack h6,
+.hack strong,
+body {
+    font-size: 1rem;
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif
+}
+
 * {
-    box-sizing: border-box;
     text-rendering: geometricPrecision
 }
 
 body {
-    font-size: 1rem;
     line-height: 1.5rem;
-    margin: 0;
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-    word-wrap: break-word
+    margin: 0
 }
 
 h1,
@@ -22,6 +270,14 @@ h4,
 h5,
 h6 {
     line-height: 1.3em
+}
+
+.hack blockquote,
+.hack code,
+.hack em,
+.hack hr:after,
+.hack strong {
+    line-height: 20px
 }
 
 fieldset {
@@ -34,20 +290,25 @@ pre {
     padding: 2rem;
     margin: 1.75rem 0;
     background-color: #fff;
-    border: 1px solid #ccc;
-    overflow: auto
+    border: 1px solid #ccc
 }
 
 code[class*=language-],
-pre[class*=language-],
-pre code {
+pre code,
+pre[class*=language-] {
     font-weight: 100;
     text-shadow: none;
     margin: 1.75rem 0
 }
 
+.hack code,
+.media-heading {
+    font-weight: 700
+}
+
 a {
-    cursor: pointer;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
     color: #ff2e88;
     text-decoration: none;
     border-bottom: 1px solid #ff2e88
@@ -67,26 +328,31 @@ a:hover {
 
 .grid.\-top {
     -ms-flex-align: start;
+    -ms-grid-row-align: flex-start;
     align-items: flex-start
 }
 
 .grid.\-middle {
     -ms-flex-align: center;
+    -ms-grid-row-align: center;
     align-items: center
 }
 
 .grid.\-bottom {
     -ms-flex-align: end;
+    -ms-grid-row-align: flex-end;
     align-items: flex-end
 }
 
 .grid.\-stretch {
     -ms-flex-align: stretch;
+    -ms-grid-row-align: stretch;
     align-items: stretch
 }
 
 .grid.\-baseline {
     -ms-flex-align: baseline;
+    -ms-grid-row-align: baseline;
     align-items: baseline
 }
 
@@ -117,8 +383,7 @@ a:hover {
 
 .cell {
     -ms-flex: 1;
-    flex: 1;
-    box-sizing: border-box
+    flex: 1
 }
 
 @media screen and (min-width:768px) {
@@ -190,16 +455,7 @@ a:hover {
 .hack h5,
 .hack h6,
 .hack strong {
-    font-size: 1rem;
-    font-style: normal;
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif
-}
-
-.hack blockquote,
-.hack code,
-.hack em,
-.hack strong {
-    line-height: 20px
+    font-style: normal
 }
 
 .hack blockquote,
@@ -232,7 +488,6 @@ a:hover {
 }
 
 .hack h1 {
-    position: relative;
     display: inline-block;
     display: table-cell;
     padding: 20px 0 30px;
@@ -241,7 +496,7 @@ a:hover {
 }
 
 .hack h1:after {
-    content: "====================================================================================================";
+    content: "=============================================================================================================================";
     position: absolute;
     bottom: 10px;
     left: 0
@@ -313,13 +568,8 @@ a:hover {
     counter-increment: a
 }
 
-.hack ol li:nth-child(n+10):after {
-    left: -7px
-}
-
 .hack blockquote {
     position: relative;
-    padding-left: 17px;
     padding-left: 2ch;
     overflow: hidden
 }
@@ -341,11 +591,7 @@ a:hover {
 
 .hack pre code:after,
 .hack pre code:before {
-    content: ""
-}
-
-.hack code {
-    font-weight: 700
+    content: ''
 }
 
 .hack code:after,
@@ -362,14 +608,17 @@ a:hover {
     margin: 20px 0
 }
 
+.btn-group,
+.form-group {
+    overflow: auto
+}
+
 .hack hr:after {
     content: "----------------------------------------------------------------------------------------------------";
     position: absolute;
     top: 0;
     left: 0;
-    line-height: 20px;
-    width: 100%;
-    word-wrap: break-word
+    width: 100%
 }
 
 @-moz-document url-prefix() {
@@ -384,10 +633,6 @@ a:hover {
 
 p {
     margin: 0 0 1.75rem
-}
-
-.container {
-    max-width: 70rem
 }
 
 .container,
@@ -432,7 +677,7 @@ p {
 }
 
 .progress-bar-filled:before {
-    content: "";
+    content: '';
     border: 6px solid transparent;
     border-top-color: gray;
     position: absolute;
@@ -461,6 +706,12 @@ table {
     color: #778087
 }
 
+.alert,
+.form-actions,
+.form-group {
+    margin-bottom: 1.75rem
+}
+
 table td,
 table th {
     vertical-align: top;
@@ -480,11 +731,6 @@ table tbody td:first-child {
 
 .form {
     width: 30rem
-}
-
-.form-group {
-    margin-bottom: 1.75rem;
-    overflow: auto
 }
 
 .form-group label {
@@ -515,7 +761,7 @@ table tbody td:first-child {
 }
 
 .form-control {
-    outline: none;
+    outline: 0;
     border: none;
     border-bottom: 2px solid #ccc;
     padding: .5rem 0;
@@ -530,7 +776,7 @@ table tbody td:first-child {
 
 .form-group.form-textarea label:after {
     position: absolute;
-    content: "";
+    content: '';
     width: 2px;
     background-color: #fff;
     right: -2px;
@@ -538,10 +784,15 @@ table tbody td:first-child {
     bottom: 0
 }
 
+.btn.btn-ghost,
+.btn.btn-ghost:hover,
+select.form-control {
+    background-color: transparent
+}
+
 textarea.form-control {
     height: auto;
     resize: none;
-    padding: 1rem 0;
     border-bottom: 2px solid #ccc;
     border-left: 2px solid #ccc;
     padding: .5rem
@@ -549,7 +800,6 @@ textarea.form-control {
 
 select.form-control {
     border-radius: 0;
-    background-color: transparent;
     -webkit-appearance: none;
     -moz-appearance: none;
     -ms-appearance: none
@@ -560,19 +810,12 @@ select.form-control {
     margin-top: .5rem
 }
 
-.form-actions {
-    margin-bottom: 1.75rem
-}
-
 .btn {
-    display: -ms-inline-flexbox;
-    display: inline-flex;
     -ms-flex-align: center;
     align-items: center;
     -ms-flex-pack: center;
     justify-content: center;
-    cursor: pointer;
-    outline: none;
+    outline: 0;
     padding: .65rem 2rem;
     font-size: 1rem;
     -webkit-user-select: none;
@@ -589,8 +832,7 @@ select.form-control {
 
 .btn.btn-ghost {
     border-color: #757575;
-    color: #757575;
-    background-color: transparent
+    color: #757575
 }
 
 .btn.btn-ghost:focus,
@@ -600,18 +842,20 @@ select.form-control {
     z-index: 2
 }
 
-.btn.btn-ghost:hover {
-    background-color: transparent
-}
-
 .btn-block {
     width: 100%;
     display: -ms-flexbox;
     display: flex
 }
 
+.media-body,
+.media-left,
+.media-right {
+    display: table-cell;
+    vertical-align: top
+}
+
 .btn-default {
-    color: #fff;
     background-color: #e0e0e0;
     border: 1px solid #e0e0e0;
     color: #333
@@ -743,8 +987,9 @@ select.form-control {
     z-index: 2
 }
 
-.btn-group {
-    overflow: auto
+.alert,
+.card {
+    border: 1px solid #ccc
 }
 
 .btn-group .btn {
@@ -753,10 +998,6 @@ select.form-control {
 
 .btn-group .btn-ghost:not(:first-child) {
     margin-left: -1px
-}
-
-.card {
-    border: 1px solid #ccc
 }
 
 .card .card-header {
@@ -768,9 +1009,7 @@ select.form-control {
 
 .alert {
     color: #ccc;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    margin-bottom: 1.75rem
+    padding: 1rem
 }
 
 .alert-success {
@@ -801,24 +1040,12 @@ select.form-control {
     padding-right: 1rem
 }
 
-.media-left,
-.media-right {
-    display: table-cell;
-    vertical-align: top
-}
-
 .media-right {
     padding-left: 1rem
 }
 
-.media-body {
-    display: table-cell;
-    vertical-align: top
-}
-
 .media-heading {
-    font-size: 1.16667rem;
-    font-weight: 700
+    font-size: 1.16667rem
 }
 
 .media-content {
@@ -849,11 +1076,8 @@ select.form-control {
 }
 
 .loading {
-    display: inline-block;
-    content: "&nbsp;";
     height: 20px;
     width: 20px;
-    margin: 0 .5rem;
     animation: a .6s infinite linear;
     border: 2px solid #e91e63;
     border-right-color: transparent;
@@ -861,22 +1085,16 @@ select.form-control {
 }
 
 .btn .loading {
-    margin-bottom: 0;
+    display: inline-block;
+    float: left;
+    margin-right: .5rem;
     width: 14px;
     height: 14px
 }
 
-.btn div.loading {
-    float: left
-}
-
-.alert .loading {
-    margin-bottom: -5px
-}
-
 @keyframes a {
     0% {
-        transform: rotate(0deg)
+        transform: rotate(0)
     }
     to {
         transform: rotate(1turn)
@@ -925,4 +1143,134 @@ select.form-control {
     .form {
         width: 100%
     }
+}
+
+aside,
+main {
+    margin: 1em 0;
+    padding: 0 1rem
+}
+
+img {
+    display: block;
+    max-width: 100%;
+    height: auto
+}
+
+.g-recaptcha {
+    margin-bottom: 10px
+}
+
+.hack hr {
+    font-size: initial;
+    line-height: initial
+}
+
+.hack section {
+    margin-bottom: 50px
+}
+
+.hack .avatarholder {
+    width: 75px;
+    height: 75px;
+    line-height: 46px;
+    font-size: 2rem;
+    background-size: initial;
+    background-position: 0;
+    background-repeat: initial;
+    background-color: initial
+}
+
+.hack .media .media-body {
+    min-width: 250px
+}
+
+.btn {
+    display: inline-block
+}
+
+.logo__component {
+    max-width: 75%;
+    margin: 10px auto
+}
+
+.side-nav__component {
+    max-width: 75%;
+    margin: 5rem auto
+}
+
+@media screen and (max-width:768px) {
+    .side-nav__component {
+        max-width: 100%;
+        margin: 0
+    }
+    .side-nav__component .side-nav-list {
+        width: 100%;
+        display: flex;
+        justify-content: space-between
+    }
+    .side-nav__component .side-nav-list>li {
+        padding-left: 5px
+    }
+    .side-nav__component .side-nav-list>li::after {
+        display: none;
+        visibility: hidden
+    }
+}
+
+main footer.footer__component {
+    border-top: 1px solid #ccc;
+    margin-top: 5rem
+}
+
+.speakers__component .card {
+    width: 100%
+}
+
+.speaker__component .card .inner img,
+.speakers__component .card .inner img {
+    margin: 0 auto
+}
+
+.speaker__component .card .inner p,
+.speakers__component .card .inner p {
+    margin-top: 5px;
+    margin-bottom: 0;
+    text-align: center
+}
+
+.events__component .grid,
+.speakers__component .grid {
+    flex-wrap: wrap
+}
+
+.events__component .grid .cell,
+.speakers__component .grid .cell {
+    padding-bottom: 10px;
+    padding-right: 10px;
+    display: flex
+}
+
+.event-speaker__component .event-speaker-event {
+    margin-top: 10px
+}
+
+.talk__component .talk-person-image {
+    width: 75px;
+    height: 75px
+}
+
+.event-parners__component {
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap
+}
+
+.event-parners__component .event-partner {
+    padding: 10px;
+    max-width: 200px
+}
+
+.event_speakers__component {
+    margin-bottom: 1.75rem
 }

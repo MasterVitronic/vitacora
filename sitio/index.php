@@ -17,7 +17,7 @@ define('tipo_db','sqlite');
 define('sqlite_db','vitacora.db');
 define('modulo_inicio','inicio');
 define('public_theme','hack');
-define('admin_theme' ,'pure');
+define('admin_theme' ,'moscow');
 define('site_url','https://vitronic.me');
 define('salt','@VNX@P@st3Ch@r3');
 define('default_date_timezone','America/Caracas');

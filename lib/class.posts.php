@@ -184,6 +184,19 @@ class posts {
     }
 
     /**
+     * Método getDescription
+     *
+     * Retorna la descripcion del post, recortando el texto total
+     */ 
+    private function getDescription($text, $length = 590){
+        $text = strip_tags($text);
+        if(strlen($text) > $length) {
+            $text = substr($text, 0, strpos($text, ' ', $length)) .' ...' ;
+        }
+        return $text;
+    }
+
+    /**
      * Método getPages
      *
      * Retorna el contanido para paginar
@@ -203,11 +216,11 @@ class posts {
                         'site_url'      => site_url,
                         'url'           => $valor->url,
                         'title'         => $valor->title,
-                        'description'   => $valor->description,
+                        'description'   => $this->getDescription($valor->articleBody),
                         'datePublished' => date("c",strtotime($valor->datePublished)),
                         'humanDate'     => $this->humanDate($valor->datePublished),
                         'dateModified'  => date("c",strtotime($valor->dateModified)),
-                        'wordCount'     => $this->wordCount($valor->articleBody),
+                        'wordCount'     => $valor->wordCount,
                         'author'        => $valor->fullname,
                         'readingTime'   => $this->readingTime($valor->articleBody)
                 ];
@@ -328,7 +341,7 @@ class posts {
                 'datePublished' => date("c",strtotime($result->datePublished)),
                 'humanDate'     => $this->humanDate($result->datePublished),
                 'dateModified'  => date("c",strtotime($result->dateModified)),
-                'wordCount'     => $this->wordCount($result->articleBody),
+                'wordCount'     => $result->wordCount,
                 'author'        => $result->fullname,
                 'readingTime'   => $this->readingTime($result->articleBody),
                 'in_category'   => ($category) ? 't' : '',

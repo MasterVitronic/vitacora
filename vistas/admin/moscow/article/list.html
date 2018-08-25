@@ -1,0 +1,77 @@
+            <section>
+                <h1>Gestión de publicaciones de Vitacora</h1>
+<!--
+                <h2 style="margin-bottom: 5px;">Filtro:</h2>
+                <div class="closest-event">
+                    <div class="alert alert-info">
+                        <form class="" action="" method="get">
+                           <div class="grid">
+                                <div class="cell -6of12">
+                                  <fieldset class="">
+                                    <label for="url">URL:</label>
+                                    <input id="url" name="url" type="text" placeholder="Url donde estara disponible el articulo" value="{{{url}}}" class="form-control" style="width: 100%;">
+                                  </fieldset>
+                                </div>
+                                <div class="cell -6of12 grid -right">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Buscar</button>
+                                </div>
+                           </div> 
+                        </form>
+                    </div>
+                </div>
+-->
+                <div class="grid">
+                    <div class="cell -12of12">
+                        <div class="cell -12of12 grid -right">
+                            <a class=" btn btn-primary fa fa-plus-square" href="/admin/article/new" alt="Nueva Publicación" title="Crear nueva publicación"></a>
+                        </div>
+                    </div>
+                </div>                
+                <h3>Publicaciones:</h3>
+                <div class="event_speakers__component">
+                     {{#pages}}
+                    <div class="media talk__component">
+                        <div class="media-left">
+                            <div class="talk-person-image" style="width: 75px;height: 75px;">
+                                <img src="{{{image}}}" alt="Imagen de articulo" title="Primera imagen del post" />
+                            </div>
+                        </div>
+                        <div class="media-body">
+                            <div class="media-heading">
+                               <div class="grid">
+                                    <div class="cell -8of12">
+                                        <a target="_blank" class="" href="/posts/{{url}}" style="display: block;border-bottom: none;" >{{title}}</a>
+                                    </div>
+                                    <div class="cell -4of12 grid -right">
+                                        <a class="btn btn-success fa fa-edit" href="/admin/article/edit/{{id_post}}" alt="Editar Publicación" title="Editar Publicación"></a>
+                                        <a class="btn btn-error fa fa-minus-square" href="/admin/article/draft/{{id_post}}" alt="Marcar como Borrador" title="Marcar como Borrador"></a>
+                                    </div>
+                               </div>
+                               <span class="" style="display: block;font-size: 11px;" >{{humanDate}} | {{comments}} </span>
+                            </div>
+                            <div class="media-content" style="text-align:justify">
+                                {{{articleBody}}}
+                            </div>
+                        </div>
+                    </div>
+                     {{/pages}}
+                </div>
+            </section>
+            <hr/>
+            <section>
+                <h2>Comentarios Recientes</h2>
+                <ul>
+                    <li>
+                        <a href="/events/7">angelvelasz</a>, Y este es mi comentario... , 2, 2018-02-15 19:00:00
+                    </li>
+                    <li>
+                        <a href="/events/6">Jhon</a>, este es otro comntario para la primera publicacion, 2017-10-19 19:00:00
+                    </li>
+                    <li>
+                        <a href="/events/5">Juan</a>,este es un comntario para la primera publicacion., 2017-06-14 19:00:00
+                    </li>
+                    <li>
+                        <a href="/events/4">Johana</a>, Hola que bien quedo ., 2017-03-16 19:00:00
+                    </li>
+                </ul>
+            </section>                
