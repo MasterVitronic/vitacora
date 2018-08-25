@@ -178,7 +178,7 @@ class posts {
         $sql_total = "select count(id_post) from posts where status='t' ";
         $recordsTotal = $this->cbd->get_var($sql_total);
         if( $recordsTotal ){
-            return  ($recordsTotal > $this->perpage ) ? ($recordsTotal/$this->perpage) : 1;
+            return  ($recordsTotal > $this->perpage ) ? ceil($recordsTotal/$this->perpage) : 1;
         }
         return false;
     }
