@@ -18,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: /admin/article", true, 301);
         return;
     }
-    header("Location: /entrada", true, 301);
-    return;    
+    header("Location: /entrada/".time(), true, 301);
+    return;
 }
 
 if($auth->isLogged()){
