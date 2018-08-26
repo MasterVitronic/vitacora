@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header("Location: /admin/article", true, 301);
         return;
     }
-    header("Location: /entrada/".time(), true, 301);
+    header("Location: /entrada?".time(), true, 301);
     return;
 }
 
@@ -39,9 +39,7 @@ $meta = [
     ]
 ];
 /*Aqui van lo script javacript a usar*/
-$js = [
-    ['js'               => 'app.js']
-];
+$js = [];
 /*@TODO normalizar esta variable*/
 $dirTheme = 'public'. DS . public_theme . DS ;
 /*La plantilla de la pagina*/
@@ -49,8 +47,8 @@ $pagina                 = $mustache->loadTemplate($dirTheme . 'page');
 /*La plantilla del metadata*/
 $metadata               = $mustache->loadTemplate($dirTheme . 'metadata');
 
-/*seteo una cache de 1 hora*/
-$guachi->set_cache_header();
+/*No hacer cache*/
+$guachi->set_no_cache_header();
 /*Finalmente renderizo la pagina*/
 print($pagina->render([
             'metadata'      => trim($metadata->render($meta)),

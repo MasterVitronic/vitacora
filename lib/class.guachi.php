@@ -183,7 +183,7 @@ class guachi {
      * establece un header cache con un tiempo determinado
      *
      * @access public
-     * @return string
+     * @return 
      */
     public function set_cache_header($seconds = false) {
         $seconds_to_cache = ($seconds) ? $seconds : $seconds_to_cache = 3600;
@@ -191,7 +191,22 @@ class guachi {
         header("Expires: $ts");
         header("Pragma: cache");
         header("Cache-Control: max-age=$seconds_to_cache");
-    } 
+    }
 
+    /**
+     * no_cache
+     *
+     * no-cache al browser
+     *
+     * @access public
+     * @return 
+     */
+    public function set_no_cache_header() {
+        header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+        header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
+    }
 }
 

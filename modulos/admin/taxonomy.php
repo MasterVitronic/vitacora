@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if($taxonomy->saveTaxonomy($limpio->type,$limpio->name,'update')){
                 $cbd->close(); /*para evitar el bloqueo de sqlite*/
                 header("Location: /admin/taxonomy", true, 301);
+                return;
             }else{
                 $taxonomy->setWarning('Error, Will Robinson, ERROR!');
             }
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if($taxonomy->saveTaxonomy($limpio->type,$limpio->name)){
                 $cbd->close(); /*para evitar el bloqueo de sqlite*/
                 header("Location: /admin/taxonomy", true, 301);
+                return;
             }else{
                 $taxonomy->setWarning('Error, Will Robinson, ERROR!');
             }
