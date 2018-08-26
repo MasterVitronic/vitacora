@@ -412,7 +412,8 @@ class article {
             'url'           => trim(str_replace(' ', '',strtolower($data->url))),
             'articleBody'   => $data->articleBody,
             'wordCount'     => $this->wordCount($data->articleBody),
-            'id_post'       => $data->id_post
+            'id_post'       => $data->id_post,
+            'dateModified'  => date("Y-m-d H:i:s")
         ];
         /*lo primero es iniciar la transaccion*/
         $this->cbd->beginTransaction();
