@@ -251,7 +251,8 @@ class article {
         $id_post = ($this->request->id) ? $this->request->id : '0';
         $this->sql = "select tags.id_tag,tag,id_post from tags "
                 ."left outer join posts_tagged on (posts_tagged.id_tag=tags.id_tag) "
-                ."where 1=1 or id_post='$id_post'  group by tags.id_tag ";
+                ."where 1=1 or id_post='$id_post' "
+                ."group by tags.id_tag order by tags.id_tag desc ";
         $results = $this->cbd->get_results($this->sql);
         if ($results) {
             foreach ($results as $campo => $valor) {
@@ -268,7 +269,6 @@ class article {
         return false;        
     }
 
-
     /**
      * Método getCategories
      *
@@ -278,7 +278,8 @@ class article {
         $id_post = ($this->request->id) ? $this->request->id : '0';
         $this->sql = "select categories.id_category,category,id_post from categories "
                 ."left outer join posts_categories on (posts_categories.id_category=categories.id_category) "
-                ."where 1=1 or id_post='$id_post'  group by categories.id_category ";
+                ."where 1=1 or id_post='$id_post' "
+                ."group by categories.id_category order by categories.id_category desc";
         $results = $this->cbd->get_results($this->sql);
         if ($results) {
             foreach ($results as $campo => $valor) {
@@ -566,7 +567,6 @@ class article {
         }
         return false;
     }
-
 
     /**
      * Método wordCount

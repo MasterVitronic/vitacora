@@ -113,7 +113,7 @@ class posts {
     public function setComment($comment) {
         $this->commentPost = $comment;
     }
-    
+
     /**
      * Método resultPerPage
      *
@@ -139,7 +139,7 @@ class posts {
         }
         return false;
     }
-    
+
     /**
      * Método getUrl
      *
@@ -291,7 +291,7 @@ class posts {
         }
         return false;        
     }
-    
+
     /**
      * Método getCategories
      *
@@ -313,7 +313,7 @@ class posts {
         }
         return false;
     }
-    
+
     /**
      * Método getContent
      *
@@ -359,7 +359,7 @@ class posts {
         }
         return false;
     }
-    
+
     /**
      * Método humanDate
      *
@@ -370,7 +370,7 @@ class posts {
          $date = spanishdate($datetime);
          return sprintf('%d de %s, %d', $date->fecha, $date->mes,$date->anio);
     }
-    
+
     /**
      * Método notFount
      *
