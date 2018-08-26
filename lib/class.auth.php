@@ -106,10 +106,12 @@ class auth {
         $sql  =  'select id_user,status,password '
                  ."from users where username='$username' and status = 't'";
         $consulta = $this->cbd->get_row($sql);
-        if(password_verify($password , $consulta->password)){
-            $this->username  = $username;
-            $this->id_user   = $consulta->id_user;
-            $this->key('login');
+        if(isset($consulta->id_user)){
+            if(password_verify($password , $consulta->password)){
+                $this->username  = $username;
+                $this->id_user   = $consulta->id_user;
+                $this->key('login');
+            }
         }
         return false;
     }
