@@ -1,6 +1,7 @@
 vitacora.db
 vitacora.shm
 vitacora.wal
+/modulos/pruebas.php
 /cache_sql/
 /extras/pruebas/
 
