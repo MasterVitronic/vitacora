@@ -170,7 +170,7 @@ class article {
      *
      * Convierte un string HTML en Markdown
      */
-    private function html2md($str) {
+    public function html2md($str) {
         require_once(ROOT . 'lib'. DS . 'Markdownify' . DS . 'Converter.php');
         require_once(ROOT . 'lib'. DS . 'Markdownify' . DS . 'ConverterExtra.php');
         require_once(ROOT . 'lib'. DS . 'Markdownify' . DS . 'Parser.php');
@@ -297,6 +297,27 @@ class article {
     }
 
     /**
+     * Método getFormatMd
+     *
+     * Retorna la opcion de formatear o no el  SRC MD segun sea el caso
+     */
+    private function getFormatMd() {
+        $request = $this->request->mode ;
+        $si = '';
+        $no = '';
+        if ( $request === 'new' ) {
+            $si = 'selected';
+        }else{
+            $no = 'selected';
+        }        
+        $data=[
+             ['normaliceMd' => '<option '.$si.' value="t">SI</option>'],
+             ['normaliceMd' => '<option '.$no.' value="f">NO</option>']
+        ];
+        return $data;
+    }
+
+    /**
      * Método getPost
      *
      *
@@ -314,9 +335,10 @@ class article {
                     'url'           => $result->url,
                     'title'         => $result->title,
                     'description'   => $result->description,
-                    'articleBody'   => $this->html2md($result->articleBody),
+                    'articleBody'   => $result->articleSrc,
                     'tags'          => $this->getTags(),
                     'categories'    => $this->getCategories(),
+                    'normaliceMd'   => $this->getFormatMd(),
                     'warnings'      => $this->Warnings
                 ];
                 return $data;
@@ -410,6 +432,7 @@ class article {
         $this->dataToSave = [
             'title'         => $data->title,
             'url'           => trim(str_replace(' ', '',strtolower($data->url))),
+            'articleSrc'    => $data->articleSrc,
             'articleBody'   => $data->articleBody,
             'wordCount'     => $this->wordCount($data->articleBody),
             'id_post'       => $data->id_post,
@@ -457,7 +480,7 @@ class article {
                 }
                 return $this->getPost();
             }elseif($request === 'new'){
-                return $dataEdit;
+                return $dataEdit + ['normaliceMd' => $this->getFormatMd()];
             }
         }
         return $this->getContentPagination();

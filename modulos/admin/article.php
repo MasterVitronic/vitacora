@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /*paso los datos a la clase crud*/
     $crud->datos($limpio);
     /*inicializo el convertidor de Markdown a HTML*/
-    $ParsedownExtra = new ParsedownExtra();
+    $md2html = new ParsedownExtra();
     $e = ['url']; //verificar si existen (campos unicos)
     $n = ['title','articleBody','url']; //no deben ser nulos
     $nulo = $crud->check('nulo', $n, false, false, false);
@@ -51,7 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tags       = isset($_POST['tags'])       ? $_POST['tags']       : '' ;
     $categories = isset($_POST['categories']) ? $_POST['categories'] : '' ;
     if (!$nulo and !$exist) {
-        $limpio->articleBody = $ParsedownExtra->text($limpio->articleBody) ;
+        $limpio->articleSrc  = $limpio->articleBody;
+        if($limpio->normalice_md === 't'){
+            $limpio->articleSrc = $article->html2md($md2html->text($limpio->articleBody));
+        }
+        $limpio->articleBody = $md2html->text($limpio->articleBody) ;
         /*nueva publicacion*/
         if(!$limpio->id_post){
             if ($article->savePost($limpio) === true) {

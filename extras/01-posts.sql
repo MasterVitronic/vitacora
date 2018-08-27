@@ -11,7 +11,8 @@ create table posts(
     title               varchar(99) not null,                                         /*el tituo del post*/
     url                 varchar(64) not null,                                         /*La url del post*/
     description         varchar     default '' not null,                              /*la descripcion del post*/
-    articleBody         varchar     default '' not null,                              /*el contenido del post*/
+    articleSrc          varchar     default '' not null,                              /*la fuente del articulo en Markdown*/
+    articleBody         varchar     default '' not null,                              /*el contenido del articulo en HTML*/
     wordCount           smallint    default null,                                     /*Numero de palabras en este post*/
     datePublished       datetime    default (datetime('now','localtime')),            /*fecha de publicacion*/
     dateModified        datetime    default (datetime('now','localtime')),            /*fecha de actualizacion*/

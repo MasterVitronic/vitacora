@@ -37,9 +37,24 @@
                     <input id="url" name="url" type="text" placeholder="Url donde estara disponible el articulo" value="{{{url}}}" class="form-control" style="width: 100%;">
                   </fieldset>
                 </div>
-                <div class="cell -6of12 grid -right" style="margin-top: 20px;">
-                    <button type="submit" class="btn btn-success">Enviar</button>
-                    <a class="btn btn-error" href="/admin/article/" alt="Cancelar" title="Cancelar"></a>
+                <div class="cell -6of12 grid -right">
+                    <div class="cell -6of12">
+                        <fieldset class="" style="margin-top: 20px;">
+                            <label for="normalice_md">NORMALIZAR MARKDOWN:</label>
+                            <select name="normalice_md" class="form-control" style="width: 100%;">
+                                {{#normaliceMd}}
+                                    {{{normaliceMd}}}
+                                {{/normaliceMd}}
+                            </select>
+                        </fieldset>
+                    </div>
+                    <div class="cell -6of12" style="margin-top: 20px;">
+                        <label for="type">ACCIONES:</label>
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-success">Enviar</button>
+                            <a class="btn btn-error" href="/admin/article/" alt="Cancelar" title="Cancelar">Cancelar</a>
+                        </div>
+                    </div>
                 </div>
            </div>
           <input type="hidden" name="id_post" id="id_post" value="{{id_post}}"/>
