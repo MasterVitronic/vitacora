@@ -180,6 +180,37 @@ class article {
     }
 
     /**
+     * Método parser
+     *
+     *
+     * Si encuenta codigo lo colorea con geshi
+     */
+    private function parser($s) {       
+        require_once(ROOT . 'lib'. DS . 'Geshi'. DS .'geshi.php');
+        require_once(ROOT . 'lib' . DS . 'class.parsedown.php');
+        $offset = 0;
+        $result = '';
+        // Divido el texto del codigo
+        $n = preg_match_all('|((\r?\n```+)\s*([a-z0-9_-]*)\r?\n)(.*?)\2\r?\n|s', $s, $matches, PREG_OFFSET_CAPTURE);
+        for($i = 0; $i < $n; $i++) {
+            $md = substr($s, $offset, $matches[4][$i][1] - $offset - strlen($matches[1][$i][0]));
+            $result .= $md ;
+            $code = html_entity_decode(trim($matches[4][$i][0]));
+            $language = strtolower($matches[3][$i][0]);
+            $lang = ($language) ? $language : 'text' ;
+            $geshi = new GeSHi($code,  $lang );
+            $geshi->enable_classes();
+            $geshi->set_link_target('_blank');          
+            $geshi->set_case_keywords(GESHI_CAPS_LOWER);
+            $result .= $geshi->parse_code();
+            $offset = $matches[4][$i][1] + strlen($matches[4][$i][0]) + strlen($matches[2][$i][0]);
+        }
+        $result .= substr($s, $offset) ; 
+        $md2html = new ParsedownExtra();
+        return $md2html->text($result);
+    }
+
+    /**
      * Método saveTaxonomy
      *
      * 
@@ -433,7 +464,7 @@ class article {
             'title'         => $data->title,
             'url'           => trim(str_replace(' ', '',strtolower($data->url))),
             'articleSrc'    => $data->articleSrc,
-            'articleBody'   => $data->articleBody,
+            'articleBody'   => $this->parser($data->articleSrc),
             'wordCount'     => $this->wordCount($data->articleBody),
             'id_post'       => $data->id_post,
             'dateModified'  => date("Y-m-d H:i:s")

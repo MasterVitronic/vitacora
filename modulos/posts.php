@@ -99,6 +99,7 @@ $meta = [
     'css'               => [
                         ['css' => 'themes/public/hack/hack.css'],
                         ['css' => 'themes/public/hack/dark.css'],
+                        ['css' => 'themes/common/geshi/geshi-mac-classic.css'],
                         ['css' => 'themes/public/hack/site.css']
     ],
     'google_verification'=> $google_verification,
