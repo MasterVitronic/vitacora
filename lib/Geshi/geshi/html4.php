@@ -1,0 +1,1 @@
+html4strict.php

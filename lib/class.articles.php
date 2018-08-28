@@ -191,7 +191,7 @@ class article {
         $offset = 0;
         $result = '';
         // Divido el texto del codigo
-        $n = preg_match_all('|((\r?\n```+)\s*([a-z0-9_-]*)\r?\n)(.*?)\2\r?\n|s', $s, $matches, PREG_OFFSET_CAPTURE);
+        $n = preg_match_all('|((\r?\n```+)\s*([a-zA-Z0-9_-]*)\r?\n)(.*?)\2\r?\n|s', $s, $matches, PREG_OFFSET_CAPTURE);
         for($i = 0; $i < $n; $i++) {
             $md = substr($s, $offset, $matches[4][$i][1] - $offset - strlen($matches[1][$i][0]));
             $result .= $md ;
