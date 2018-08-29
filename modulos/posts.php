@@ -10,8 +10,6 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 <vitronic2@gmail.com>   <mastervitronic@vitronic.com.ve>
 */
 
-get_ip(false);
-
 /*la clase posts*/
 require_once(ROOT . 'lib' . DS . 'class.posts.php');
 /*inicializo la clase posts*/
