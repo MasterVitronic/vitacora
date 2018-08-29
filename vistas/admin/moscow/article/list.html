@@ -22,7 +22,7 @@
 -->
                 <div class="grid">
                     <div class="cell -12of12">
-                        <div class="cell -12of12 grid -right">
+                        <div class="cell -12of12 grid -right" style="text-align: center;">
                             <a class=" btn btn-primary fa fa-plus-square" href="/admin/article/new" alt="Nueva Publicación" title="Crear nueva publicación"></a>
                         </div>
                     </div>
@@ -36,13 +36,13 @@
                                 <img src="{{{image}}}" alt="Imagen de articulo" title="Primera imagen del post" />
                             </div>
                         </div>
-                        <div class="media-body">
+                        <div class="media-body" style="width: 100%;">
                             <div class="media-heading">
                                <div class="grid">
                                     <div class="cell -8of12">
                                         <a target="_blank" class="" href="/posts/{{url}}" style="display: block;border-bottom: none;" >{{title}}</a>
                                     </div>
-                                    <div class="cell -4of12 grid -right">
+                                    <div class="cell -4of12 grid -right" style="text-align: center;">
                                         <a class="btn btn-success fa fa-edit" href="/admin/article/edit/{{id_post}}" alt="Editar Publicación" title="Editar Publicación"></a>
                                         <a class="btn {{toogle_icon}}" href="/admin/article/toggle/{{id_post}}" alt="Toggle status" title="Toggle status"></a>
                                     </div>
