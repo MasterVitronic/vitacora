@@ -1,0 +1,164 @@
+/**!
+ * @package   Vitacora/GeshiScheme
+ * @filename  geshi-dark-scheme.css
+ * @version   1.0
+ * @author    Díaz Urbaneja Víctor Eduardo Diex <diaz.victor@openmailbox.org>
+ * @date      28.08.2018 02:16:33 -04
+ */
+
+
+/*
+* Global geshi styles
+**********************/
+#main pre {
+	line-height: 1.5em;
+	font-size: 16px;
+	white-space: normal;
+	padding: 0;
+	background: #eae9e5;
+	border: 1px solid #c0c0c0;
+}
+pre {
+	font-family:ProFontWindows,Source Code Pro,monospace;
+	background:#442434!important;
+	font-weight:bold!important;
+}
+pre a {
+	border-bottom:2px solid #D04648;
+}
+pre a:hover {
+	background: #A52A2A;
+}
+pre ol {
+	list-style: decimal;
+	list-style-position: outside;
+	padding: 0;
+	margin: 0;
+}
+#main pre ol li {
+	margin: 0 0 0 35px;
+	padding: 0;
+	color: #000;
+	clear: none;
+}
+pre ol li div {
+	color:#000;
+}
+
+
+/* php */
+pre[lang=php] ol div,
+pre.php ol div {
+	color:#fd1435;
+}
+pre[lang=php] .co4,pre.php .co4 {
+	color:#757161;
+}
+/* Line highlights */
+.li1 {
+	background: #f2f2f2;
+}
+/* Line highlights */
+.li1 {
+	background: #f2f2f2;
+}
+
+/* comments */
+.co1,
+.coMULTI {
+	color:#757161;
+}
+/* methods */
+.me1{
+	color:#deeed6;
+}
+.me0 {	
+
+}
+.me2 {	
+	color:#000;
+}
+
+/* brackets */
+.br0 {
+	color:#8595a1;
+}
+
+/* strings */
+.st0 {
+	color:#dad45e;
+}
+.sy0 {
+	color:#8595a1;
+}
+
+/* keywords */
+.kw1 {
+	color: #d04648;
+}
+.kw2 {
+	color:#d04648;		
+}
+
+.kw3 {
+	color:#deeed6;
+}
+
+/* numbers */
+.nu0 {
+	color:#6dc2ca;
+}
+
+/* vars */
+.re0 {
+	color:#0086b3;
+}
+
+
+/* 
+* CSS selectors 
+*****************/
+/* classnames */
+
+[lang=css] .kw2,
+pre.css .kw2 {
+	color:#d04648;
+}
+[lang=css] .re0,
+pre.css .re0 {
+	color:#6dc2ca;
+}
+[lang=css] .kw2,
+.css .kw2 {
+	color:#0a0aa5;
+}
+.re1 {
+	color: #6daa2c;
+}
+/* px values */
+[lang=css] .re3,
+.css .re3 {
+	color:#dad45e;
+}
+
+/*
+* Javascript
+****************/
+[lang=javascript] .me1,
+.javascript .me1 {
+	color:#deeed6;
+}
+/*
+* HTML
+****************/
+[lang=html] .kw3,
+pre.html .kw3{
+	color:#0086b3;
+}
+/*
+* Lua
+****************/
+[lang=lua] .kw3,
+pre.lua .kw3 {
+	color:#6daa2c;
+}
