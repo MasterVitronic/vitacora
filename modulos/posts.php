@@ -10,6 +10,8 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 <vitronic2@gmail.com>   <mastervitronic@vitronic.com.ve>
 */
 
+get_ip(false);
+
 /*la clase posts*/
 require_once(ROOT . 'lib' . DS . 'class.posts.php');
 /*inicializo la clase posts*/
@@ -99,7 +101,7 @@ $meta = [
     'css'               => [
                         ['css' => 'themes/public/hack/hack.css'],
                         ['css' => 'themes/public/hack/dark.css'],
-                        ['css' => 'themes/common/geshi/geshi-mac-classic.css'],
+                        ['css' => 'themes/common/geshi/geshi-dark-scheme.css'],
                         ['css' => 'themes/public/hack/site.css']
     ],
     'google_verification'=> $google_verification,
