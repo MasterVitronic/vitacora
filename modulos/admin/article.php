@@ -50,7 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     ];
     $tags       = isset($_POST['tags'])       ? $_POST['tags']       : '' ;
     $categories = isset($_POST['categories']) ? $_POST['categories'] : '' ;
-    if (!$nulo and !$exist) {
+    $csrf = $auth->csrfIsValid($limpio->csrf);
+    if (!$csrf) {
+        $article->setWarning('AVISO, csrf detectado, si considera que esto es un error, proceda, ESTA AVISADO!');
+    }
+    if (!$nulo and !$exist and $csrf) {
         $limpio->articleSrc  = $limpio->articleBody;
         if($limpio->normalice_md === 't'){
             $limpio->articleSrc = $article->html2md($md2html->text($limpio->articleBody));
@@ -87,11 +91,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 /*togglear el estatus de la publicacion*/
 if( $article->request->mode === 'toggle' ){
-    $article->toggleDraft($article->request->id);
+    if($auth->csrfIsValid($article->request->csrf)){
+        $article->toggleDraft($article->request->id);
+    }
     header("Location: /admin/article", true, 301);
     return;
 }
-
+/*seteo el csrf*/
+$auth->setCsrf();
 /*Aqui van los datos de la plantilla metadata*/
 $meta = [
     'title'             => 'Administración de articulos | '  ,
@@ -129,7 +136,7 @@ $content                = $mustache->loadTemplate($article->getTemplate());
 print($pagina->render([
             'metadata'  => $metadata->render($meta),
             'body'      => $body->render([
-                'content'  => $content->render($article->getContent()),
+                'content'  => $content->render($article->getContent() + [ 'csrf' => $auth->getCsrf() ]  ),
                 'menu'     => $mustache->loadTemplate($dirTheme . 'menu'),
                 'footer'   => $mustache->loadTemplate($dirTheme . 'footer')
             ]),

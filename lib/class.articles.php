@@ -388,7 +388,8 @@ class article {
         if( isset($request) ){
             $this->request = (object)[
                 'mode' => $request,
-                'id'   => isset($this->get->arg2) ? $this->get->arg2 : false
+                'id'   => isset($this->get->arg2) ? $this->get->arg2 : false,
+                'csrf' => isset($this->get->arg3) ? $this->get->arg3 : false
             ];
         }
         return false;

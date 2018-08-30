@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="cell -4of12 grid -right" style="text-align: center;">
                                         <a class="btn btn-success fa fa-edit" href="/admin/article/edit/{{id_post}}" alt="Editar Publicación" title="Editar Publicación"></a>
-                                        <a class="btn {{toogle_icon}}" href="/admin/article/toggle/{{id_post}}" alt="Toggle status" title="Toggle status"></a>
+                                        <a class="btn {{toogle_icon}}" href="/admin/article/toggle/{{id_post}}/{{csrf}}" alt="Toggle status" title="Toggle status"></a>
                                     </div>
                                </div>
                                <span class="" style="display: block;font-size: 11px;" >{{humanDate}} | <a  target="_blank" class="" href="/posts/{{url}}#comments">{{comments}}</a>  </span>
