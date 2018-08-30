@@ -13,15 +13,19 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_reporting(0); //deshabilito los reportes de error
     /*recolecto los datos y los sanitizo*/
-    $limpio = $limpiador->recolectar($_POST, tipo_db, true);    
-    if($auth->logIn($limpio->username, $limpio->password)){
-        header("Location: /admin/article", true, 301);
-        return;
+    $limpio = $limpiador->recolectar($_POST, tipo_db, true);
+    if( $auth->csrfIsValid($limpio->csrf) ){
+        if($auth->logIn($limpio->username, $limpio->password)){
+            header("Location: /admin/article", true, 301);
+            return;
+        }
     }
     header("Location: /entrada?".time(), true, 301);
     return;
 }
-
+/*seteo el csrf*/
+$auth->setCsrf();
+/*redireccion en caso de estar logueado*/
 if($auth->isLogged()){
     header("Location: /admin/article", true, 301);
     return;
@@ -46,14 +50,15 @@ $dirTheme = 'public'. DS . public_theme . DS ;
 $pagina                 = $mustache->loadTemplate($dirTheme . 'page');
 /*La plantilla del metadata*/
 $metadata               = $mustache->loadTemplate($dirTheme . 'metadata');
-
+/*la plantilla del body*/
+$body                   = $mustache->loadTemplate($dirTheme . 'login/main');
 /*No hacer cache*/
 $guachi->set_no_cache_header();
 /*Finalmente renderizo la pagina*/
 print($pagina->render([
             'metadata'      => trim($metadata->render($meta)),
             'header'        => $mustache->loadTemplate($dirTheme .'header'),
-            'body'          => $mustache->loadTemplate($dirTheme . 'login/main'),
+            'body'          => $body->render([ 'csrf' => $auth->getCsrf() ]),
             'footer'        => $mustache->loadTemplate($dirTheme .'footer'),
             'js'            => $js
         ]
