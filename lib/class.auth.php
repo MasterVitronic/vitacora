@@ -88,10 +88,15 @@ class auth {
             case 'exit':
                 return (session_destroy()) ? true : false;
             case 'login':
-                $_SESSION = [
-                    'username'=> $this->username,
-                    'id_user' => $this->id_user
-                ];
+                $ip_address = get_ip();
+                if($ip_address){
+                    $_SESSION = [
+                        'username'          => $this->username,
+                        'id_user'           => $this->id_user,
+                        'session_timeout'   => (time() + session_timeout),
+                        'ip_address'        => $ip_address
+                    ];
+                }
                 return true;
         }
         return false;
@@ -144,12 +149,28 @@ class auth {
     }
 
     /**
+     * metodo sessionIsValid
+     *
+     * @access public
+     */
+    public function sessionIsValid() {
+        if( isset($_SESSION['id_user']) and isset($_SESSION['session_timeout']) ){
+            if( $_SESSION['session_timeout'] > time() ){
+                $_SESSION['session_timeout'] = (time() + session_timeout);
+                return true;
+            }
+            $this->logOut();
+        }
+        return false;
+    }
+
+    /**
      * metodo isLogged
      *
      * @access public
      */
     public function isLogged() {
-       return isset($_SESSION['id_user']);
+       return ($this->sessionIsValid()) ? true : false ;
     }
 
     /**
@@ -165,6 +186,33 @@ class auth {
             ];
         }
         return false;
+    }
+
+    /**
+     * metodo setCsrf
+     *
+     * @access public
+     */
+    public function setCsrf() {
+        $_SESSION['csrf'] = bin2hex(openssl_random_pseudo_bytes(32));
+    }
+
+    /**
+     * metodo getCsrf
+     *
+     * @access public
+     */
+    public function getCsrf() {
+        return $_SESSION['csrf'];
+    }
+    
+    /**
+     * metodo csrfIsValid
+     *
+     * @access public
+     */
+    public function csrfIsValid($csrf) {
+        return hash_equals($this->getCsrf(), $csrf);
     }
 
 }

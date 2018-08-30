@@ -15,6 +15,7 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', realpath(dirname(__FILE__)) .DS.'..'.DS);
 define('tipo_db','sqlite');
 define('sqlite_db','vitacora.db');
+define('session_timeout','900');
 define('modulo_inicio','inicio');
 define('public_theme','hack');
 define('admin_theme' ,'moscow');
