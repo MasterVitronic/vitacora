@@ -104,5 +104,5 @@ function get_ip(){
     if( filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ) {
       $ip = $_SERVER['REMOTE_ADDR'];
     }
-    return  ($ip) ? $ip : 'Unknown' ;
+    return $ip;
 }
