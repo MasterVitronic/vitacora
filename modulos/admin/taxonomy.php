@@ -18,7 +18,7 @@ $taxonomy->setRequest();
 
 /*acciones al guardar*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
-    error_reporting(0); //deshabilito los reportes de error
+    error_reporting(-1); //deshabilito los reportes de error
     /*recolecto los datos y los sanitizo*/
     $limpio = $limpiador->recolectar($_POST, tipo_db, true);
     /*paso los datos a la clase crud*/
@@ -42,7 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $taxonomy->setDefaultWarning($exist,'exist');
     }
     $taxonomy->dataToSave=['name' => $limpio->name,'type' => $limpio->type];
-    if (!$nulo and !$exist) {
+    $csrf = $auth->csrfIsValid($limpio->csrf);
+    if (!$csrf) {
+        $taxonomy->setWarning('AVISO, csrf detectado, si considera que esto es un error, proceda, ESTA AVISADO!');
+    }
+    if (!$nulo and !$exist and $csrf) {
         if($taxonomy->request->id){
             /*actualizar*/
             if($taxonomy->saveTaxonomy($limpio->type,$limpio->name,'update')){
@@ -65,7 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-
+/*seteo el csrf*/
+$auth->setCsrf();
 /*Aqui van los datos de la plantilla metadata*/
 $meta = [
     'title'             => 'Administración de Taxonomia | '  ,
@@ -95,7 +100,7 @@ $content                = $mustache->loadTemplate($taxonomy->getTemplate());
 print($pagina->render([
             'metadata'  => $metadata->render($meta),
             'body'      => $body->render([
-                'content'  => $content->render($taxonomy->getContent()),
+                'content'  => $content->render($taxonomy->getContent() + [ 'csrf' => $auth->getCsrf() ] ),
                 'menu'     => $mustache->loadTemplate($dirTheme . 'menu'),
                 'footer'   => $mustache->loadTemplate($dirTheme . 'footer')
             ]),
