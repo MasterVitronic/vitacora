@@ -18,7 +18,7 @@ $taxonomy->setRequest();
 
 /*acciones al guardar*/
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {  
-    error_reporting(-1); //deshabilito los reportes de error
+    error_reporting(0); //deshabilito los reportes de error
     /*recolecto los datos y los sanitizo*/
     $limpio = $limpiador->recolectar($_POST, tipo_db, true);
     /*paso los datos a la clase crud*/
