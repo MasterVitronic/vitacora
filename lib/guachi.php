@@ -98,4 +98,11 @@ function getBrowser() {
     return $bowser ;
 }
 
-
+/*intenta obtener la ip del cliente*/
+function get_ip(){
+    $ip = false;
+    if( filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP) ) {
+      $ip = $_SERVER['REMOTE_ADDR'];
+    }
+    return  ($ip) ? $ip : 'Unknown' ;
+}
