@@ -96,8 +96,9 @@ class auth {
                         'session_timeout'   => (time() + session_timeout),
                         'ip_address'        => $ip_address
                     ];
+                    return true;
                 }
-                return true;
+                return false;
         }
         return false;
     }
