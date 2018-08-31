@@ -10,31 +10,10 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 <vitronic2@gmail.com>   <mastervitronic@vitronic.com.ve>
 */
 
-define('GUACHI_VERSION','1.8');
-define('DS', DIRECTORY_SEPARATOR);
-define('ROOT', realpath(dirname(__FILE__)) .DS.'..'.DS);
-define('tipo_db','sqlite');
-define('sqlite_db','vitacora.db');
-define('session_timeout','900');
-define('modulo_inicio','inicio');
-define('public_theme','hack');
-define('admin_theme' ,'moscow');
-define('site_url','https://vitronic.me');
-define('salt','@VNX@P@st3Ch@r3');
-define('default_date_timezone','America/Caracas');
-define('locale','es_ES.UTF-8');
-define('format_fecha','d/m/Y');
-define('format_date_time','d/m/Y h:i:s A');
-define('format_time','h:i A');
-define('locale_money','es_VE');
-define('char_remove_money','Bs.');
-define('simbolo_money','Bs');
-define('guachi_production','no');
+require_once realpath(dirname(__FILE__)) . '/../config.php';
 date_default_timezone_set(default_date_timezone);
 setlocale(LC_TIME, locale);
-(guachi_production === 'no')?error_reporting(-1):error_reporting(0);
-$header="X-Powered-By: Guachi (Lightweight and very simple web "
-        ."development framework of Vitronic) v".GUACHI_VERSION;
+(production === 'no')?error_reporting(-1):error_reporting(0);
  
 require_once(ROOT . 'lib' . DS . 'class.db.php');
 require_once ROOT . 'lib' . DS . 'guachi.php';
@@ -61,7 +40,7 @@ $mustache       =  new Mustache_Engine(array(
                         ['extension' => '.html']
     )
 ));
-header($header);
+
 if (isset($get_modulo['modulo'])) {
     $file_modulo = $get_modulo['modulo'];
     if ($controlador->check_modulo($file_modulo)) {
