@@ -22,6 +22,7 @@ class posts {
     private $Warnings ;
     private $name = '';
     private $commentPost = '';
+    private $metatags;
 
     /**
      * Instancia para el patrón de diseño singleton (instancia única)
@@ -46,6 +47,7 @@ class posts {
         $this->limpiador    = limpiador::iniciar();
         $this->request      = $this->limpiador->recolectar($this->controlador->get_modulo(),tipo_db,true);
         $this->limit        = '';
+        $this->metatags     = metadata::iniciar();
     }
 
     /**
@@ -212,19 +214,23 @@ class posts {
         $results = $this->cbd->get_results($sql);
         if ($results) {
             foreach ($results as $campo => $valor) {
+                $datePublished = date("c",strtotime($valor->datePublished));
+                $dateModified  = date("c",strtotime($valor->dateModified));
                 $data['pages'][] = [
                         'site_url'      => site_url,
                         'url'           => $valor->url,
                         'title'         => $valor->title,
                         'description'   => $this->getDescription($valor->articleBody),
-                        'datePublished' => date("c",strtotime($valor->datePublished)),
+                        'datePublished' => $datePublished,
+                        'dateModified'  => $dateModified,
                         'humanDate'     => $this->humanDate($valor->datePublished),
-                        'dateModified'  => date("c",strtotime($valor->dateModified)),
                         'wordCount'     => $valor->wordCount,
                         'author'        => $valor->fullname,
                         'readingTime'   => $this->readingTime($valor->articleBody)
                 ];
             }
+            $this->metatags->setPublishedTime(date("c",strtotime($results[0]->datePublished)));
+            $this->metatags->setModifiedTime(date("c",strtotime($results[0]->dateModified)));
             $totalPages    = $this->getTotalPages();
             $prevPage      = ($currentPage > 1) ? ($currentPage - 1) : '';
             $nextPage      = ($currentPage < $totalPages) ? ($currentPage + 1) : '';          
@@ -327,6 +333,16 @@ class posts {
               ."where posts.url='$url'";
         $result = $this->cbd->get_row($sql);
         if ($result) {
+            $datePublished = date("c",strtotime($result->datePublished));
+            $dateModified  = date("c",strtotime($result->dateModified));
+            /*seteo la metadata*/
+            $this->metatags->setCanonicalUrl(site_url .'/posts/'.$result->url);
+            $this->metatags->setTitle($result->title);
+            $this->metatags->setDescription($this->getDescription($result->articleBody, 200));
+            $this->metatags->setPageType('article');
+            $this->metatags->setPublishedTime($datePublished);
+            $this->metatags->setModifiedTime($dateModified);
+            /**/
             $category = $this->getCategories($result->url);
             $tag      = $this->getTags($result->url);
             $comment  = $this->getComments($result->url);
@@ -338,9 +354,9 @@ class posts {
                 'title'         => $result->title,
                 'description'   => $result->description,
                 'articleBody'   => $result->articleBody,
-                'datePublished' => date("c",strtotime($result->datePublished)),
+                'datePublished' => $datePublished,
+                'dateModified'  => $dateModified,
                 'humanDate'     => $this->humanDate($result->datePublished),
-                'dateModified'  => date("c",strtotime($result->dateModified)),
                 'wordCount'     => $result->wordCount,
                 'author'        => $result->fullname,
                 'readingTime'   => $this->readingTime($result->articleBody),
