@@ -82,7 +82,9 @@ class config {
         $config = parse_ini_file(ROOT . DS . 'guachi.ini', true);
         foreach ($config as $bloque => $conf) {
             foreach ($config[$bloque] as $var => $valor) {
-                define(trim($var), trim($valor));
+                if(!is_array($valor)){
+                    define(trim($var), trim($valor));
+                }
             }
         }
         $header="X-Powered-By: Guachi (Lightweight and very simple web "
