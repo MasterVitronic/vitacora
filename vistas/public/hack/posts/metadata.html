@@ -1,0 +1,24 @@
+<title>{{title}}</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {{#css}}
+        <link rel="stylesheet"           href="/css/{{{css}}}">
+        {{/css}}
+        <link rel="canonical"            href="{{{canonical_url}}}">
+        <!-- Common MetaTags -->
+        <meta name="viewport"            content="width=device-width, initial-scale=1.0">
+        <meta name="generator"           content="Guachi (Lightweight and very simple php framework) v{{{guachi_version}}}">
+        <meta name="theme-color"         content="#000">
+        <meta name="referrer"            content="same-origin">
+        <meta name="description"         content="{{{descripcion}}}">
+        <meta name="author"              content="{{{author}}}">
+        {{#socialmeta}}
+        {{{socialmeta}}}
+        {{/socialmeta}}
+        {{#google_verification}}
+        <!-- Google Site Verification -->
+        <meta name="google-site-verification" content="{{{google_verification}}}" />
+        {{/google_verification}}
+        {{#schemas}}
+        {{{schemas}}}
+        {{/schemas}}
