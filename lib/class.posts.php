@@ -335,10 +335,11 @@ class posts {
         if ($result) {
             $datePublished = date("c",strtotime($result->datePublished));
             $dateModified  = date("c",strtotime($result->dateModified));
+            $description   = $this->getDescription($result->articleBody, 200);
             /*seteo la metadata*/
             $this->metatags->setCanonicalUrl(site_url .'/posts/'.$result->url);
             $this->metatags->setTitle($result->title);
-            $this->metatags->setDescription($this->getDescription($result->articleBody, 200));
+            $this->metatags->setDescription($description);
             $this->metatags->setPageType('article');
             $this->metatags->setPublishedTime($datePublished);
             $this->metatags->setModifiedTime($dateModified);
@@ -352,7 +353,7 @@ class posts {
                 'site_url'      => site_url,
                 'url'           => $result->url,
                 'title'         => $result->title,
-                'description'   => $result->description,
+                'description'   => $description,
                 'articleBody'   => $result->articleBody,
                 'datePublished' => $datePublished,
                 'dateModified'  => $dateModified,
