@@ -462,8 +462,8 @@ class metadata {
                  //."\t\t" .'<meta itemprop="name"            content="'.$this->title.'"/>'.PHP_EOL
                  //."\t\t" .'<meta itemprop="description"     content="'.$this->description.'"/>'.PHP_EOL
                  //."\t\t" .'<meta itemprop="image"           content="'.$this->image.'"/>'.PHP_EOL
-                 ."\t\t" .'<link rel="author"               href="https://plus.google.com/+VíctorDiexDíazDevera/posts"/>'.PHP_EOL
-                 ."\t\t" .'<link rel="publisher"            href="https://plus.google.com/+VíctorDiexDíazDevera"/>'.PHP_EOL
+                 ."\t\t" .'<link rel="author"               href="'.$this->schemaInfo['Person']['Google'].'/posts"/>'.PHP_EOL
+                 ."\t\t" .'<link rel="publisher"            href="'.$this->schemaInfo['Person']['Google'].'"/>'.PHP_EOL
 
                  ."\t\t" .'<!-- Robots -->'.PHP_EOL
                  ."\t\t" .'<meta name="googlebot"           content="index,follow">'.PHP_EOL
