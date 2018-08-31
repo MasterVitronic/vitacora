@@ -55,7 +55,7 @@ $url_twitter            = 'https://twitter.com/MasterVitronic';
 
 /*fechas*/
 $datePublished          = '2018-08-17 00:00';
-$dateModified           = '2018-08-19 12:51';
+$dateModified           = '2018-08-31 03:00';
 
 
 /*Aqui van los datos de la plantilla metadata*/
