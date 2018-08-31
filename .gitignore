@@ -4,5 +4,6 @@ vitacora.wal
 guachi.ini
 /modulos/pruebas.php
 /cache_sql/
+/cache/*
 /extras/pruebas/
 
