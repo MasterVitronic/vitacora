@@ -105,12 +105,10 @@ $html = $pagina->render([
             'js'        => $js
         ]
 );
-/*inicio la cache*/
-$date = spanishdate(date('h:i:s A'));
-$cache->start();
-print('<!--Servido desde la cache. Almacenado el '.sprintf('%s %d de %s de %d %s', $date->dia, $date->fecha, $date->mes,$date->anio, $date->hora . "-->\n") );
-print($html . PHP_EOL);
-print("<!--Fin de bloque en cache-->");
-$cache->end();
+if(cache_usage === '1'){
+    $cache->start();
+    print($html . PHP_EOL);
+    $cache->end();
+}
 /*finalmente imprimo*/
 print($html);
