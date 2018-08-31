@@ -543,7 +543,6 @@ class article {
         }
         if($result === true){
             /*@TODO implementar un metodo que busque la pagina de post y la borre de la cache*/
-            $this->cache->clear('/posts');
             $this->cache->clear('/posts/'.$toggle->url);
             $this->cbd->commit();
         }else{

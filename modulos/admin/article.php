@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $saveCategories = $article->saveCategories($categories,$limpio->id_post);
                 if( $saveTags and $saveCategories ){
                     $cbd->close(); /*para evitar el bloqueo de sqlite*/
-                    $cache->clear('/posts/');
+                    $cache->clear('/posts');
                     $cache->clear('/posts/'.$limpio->url);/*borro la cache de esta publicacion*/
                     header("Location: /admin/article", true, 301);
                 }
@@ -93,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 /*togglear el estatus de la publicacion*/
 if( $article->request->mode === 'toggle' ){
     if($auth->csrfIsValid($article->request->csrf)){
+        $cache->clear('/posts');/*limpio la cache del paginador*/
         $article->toggleDraft($article->request->id);
     }
     header("Location: /admin/article", true, 301);
