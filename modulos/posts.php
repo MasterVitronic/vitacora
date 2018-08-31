@@ -16,6 +16,8 @@ require_once(ROOT . 'lib' . DS . 'class.posts.php');
 $posts = posts::iniciar();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    /*limpio la cache en cualquier caso*/
+    $cache->clear();
     /*recolecto los datos y los sanitizo*/
     $limpio = $limpiador->recolectar($_POST, tipo_db, true);
     /*paso los datos a la clase crud*/
@@ -48,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 /*establece los resultados por pagina*/
 $posts->resultPerPage(3);
+
+if ($cache->check()) {
+    print($cache->out());
+    return;
+}
 
 $lang = 'es';
 $metatags->setSiteName(siteName);
@@ -89,7 +96,7 @@ $metadata               = $mustache->loadTemplate($dirTheme . DS . 'posts/metada
 $body                   = $mustache->loadTemplate($dirTheme . $posts->getTemplate());
 
 /*Finalmente rederizo la pagina*/
-print($pagina->render([
+$html = $pagina->render([
             'lang'      => $lang,
             'body'      => $body->render($posts->getContent()),
             'metadata'  => trim($metadata->render($metatags->getMetadata())),
@@ -97,4 +104,13 @@ print($pagina->render([
             'footer'    => $mustache->loadTemplate($dirTheme . 'footer'),
             'js'        => $js
         ]
-));
+);
+/*inicio la cache*/
+$date = spanishdate(date('h:i:s A'));
+$cache->start();
+print('<!--Servido desde la cache. Almacenado el '.sprintf('%s %d de %s de %d %s', $date->dia, $date->fecha, $date->mes,$date->anio, $date->hora . "-->\n") );
+print($html . PHP_EOL);
+print("<!--Fin de bloque en cache-->");
+$cache->end();
+/*finalmente imprimo*/
+print($html);
