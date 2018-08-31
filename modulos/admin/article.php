@@ -79,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $saveCategories = $article->saveCategories($categories,$limpio->id_post);
                 if( $saveTags and $saveCategories ){
                     $cbd->close(); /*para evitar el bloqueo de sqlite*/
+                    $cache->clear('/posts/');
                     $cache->clear('/posts/'.$limpio->url);/*borro la cache de esta publicacion*/
                     header("Location: /admin/article", true, 301);
                 }
