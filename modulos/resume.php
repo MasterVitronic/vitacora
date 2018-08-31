@@ -135,7 +135,7 @@ $body                   = $mustache->loadTemplate($dirTheme . 'resume/main');
 $guachi->set_cache_header();
 /*Finalmente renderizo la pagina*/
 print($pagina->render([
-            'lang'          => $lang,
+            'lang'          => 'es',
             'metadata'      => trim($metadata->render($meta)),
             'header'        => $mustache->loadTemplate($dirTheme . 'header'),
             'body'          => $body->render([
