@@ -13,7 +13,7 @@ Copyright (c) 2018  Díaz  Víctor  aka  (Máster Vitronic)
 require_once realpath(dirname(__FILE__)) . '/../config.php';
 date_default_timezone_set(default_date_timezone);
 setlocale(LC_TIME, locale);
-(production === 'no')?error_reporting(-1):error_reporting(0);
+(production)?error_reporting(0):error_reporting(-1);
  
 require_once(ROOT . 'lib' . DS . 'class.db.php');
 require_once ROOT . 'lib' . DS . 'guachi.php';
