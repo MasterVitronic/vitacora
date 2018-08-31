@@ -23,6 +23,7 @@ require_once ROOT . 'lib' . DS . 'class.scape_string.php';
 require_once ROOT . 'lib' . DS . 'class.guachi.php';
 require_once ROOT . 'lib' . DS . 'class.crud.php';
 require_once ROOT . 'lib' . DS . 'class.mustache.php';
+require_once ROOT . 'lib' . DS . 'class.metadata.php';
 
 /*Iniciamos todas las instancias*/
 $cbd            = new ezSQL_sqlite3(ROOT , sqlite_db);
@@ -34,6 +35,7 @@ $limpiador      = limpiador::iniciar();
 $controlador    = controlador::iniciar();
 $get_modulo     = $controlador->get_modulo();
 $auth           = auth::iniciar();
+$metatags       = metadata::iniciar();
 $mustache       =  new Mustache_Engine(array(
     'loader'    => new Mustache_Loader_FilesystemLoader(
                         ROOT . DS . 'vistas',
