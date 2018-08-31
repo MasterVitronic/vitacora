@@ -321,6 +321,16 @@ class posts {
     }
 
     /**
+     * Método getFirstImage
+     *
+     * Retorna la primera imagen de un string HTML
+     */ 
+    private function getFirstImage($str){
+        preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $str, $matches);
+        return isset($matches[1][0])?$matches[1][0]:'/img/default.png';
+    }
+
+    /**
      * Método getContent
      *
      *
@@ -338,6 +348,7 @@ class posts {
             $description   = $this->getDescription($result->articleBody, 200);
             /*seteo la metadata*/
             $this->metatags->setCanonicalUrl(site_url .'/posts/'.$result->url);
+            $this->metatags->setImage($this->getFirstImage($result->articleBody));
             $this->metatags->setTitle($result->title);
             $this->metatags->setDescription($description);
             $this->metatags->setPageType('article');
