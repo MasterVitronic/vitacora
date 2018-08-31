@@ -45,7 +45,7 @@ class MicroCache {
 			$this->memcache = new Memcache;
 			@$this->memcache->connect('localhost', 11211) or $this->c_type = 'file';
 		}
-		$this->key = md5( $key===false ? $_SERVER["REQUEST_URI"] : rtrim($key,'/')  );
+		$this->key = md5( $key===false ? rtrim($_SERVER["REQUEST_URI"],'/') : rtrim($key,'/')  );
 		$this->file = $this->patch . $this->key . '.cache';
 	}
 
