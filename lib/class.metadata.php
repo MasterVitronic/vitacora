@@ -414,11 +414,14 @@ class metadata {
                 ."\t\t" .'<meta property="og:title"        content="'.$this->title.'">' .PHP_EOL
                 ."\t\t" .'<meta property="og:type"         content="'.$this->pagetype.'">'.PHP_EOL
                 ."\t\t" .'<meta property="og:url"          content="'.$this->canonical.'">'.PHP_EOL
-                ."\t\t" .'<meta property="og:image"        content="'.$this->image.'">'.PHP_EOL
                 ."\t\t" .'<meta property="og:description"  content="'.$this->description.'">'.PHP_EOL
                 ."\t\t" .'<meta property="og:site_name"    content="'.$this->siteName.'">'.PHP_EOL
                 ."\t\t" .'<meta property="og:locale"       content="'.$this->lang.'">'.PHP_EOL
-                ."\t\t" .'<meta property="og:updated_time" content="'.$this->modifiedTime.'"/>';
+                ."\t\t" .'<meta property="og:updated_time" content="'.$this->modifiedTime.'">'.PHP_EOL
+                ."\t\t" .'<meta property="og:image"        content="'.$this->image.'">'.PHP_EOL
+                ."\t\t" .'<meta property="og:image:secure_url" content="'.$this->image.'">'.PHP_EOL
+                ."\t\t" .'<meta property="og:image:width"  content="625">'.PHP_EOL
+                ."\t\t" .'<meta property="og:image:height" content="621">';
         if($this->pagetype === 'article'){
              $meta .= PHP_EOL."\t\t" .'<meta property="article:published_time" content="'.$this->publishedTime.'">'.PHP_EOL
                 ."\t\t" .'<meta property="article:modified_time"  content="'.$this->modifiedTime.'" />'.PHP_EOL
