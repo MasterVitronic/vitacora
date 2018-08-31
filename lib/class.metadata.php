@@ -408,6 +408,7 @@ class metadata {
      *
      * @access private
      * @return string
+     * @TODO falta una funcion que retorne el ancho y alto de la imagen
      */
     private function getOpenGraphMeta() {
         $meta = '<!-- Open Graph data -->'.PHP_EOL
@@ -420,8 +421,8 @@ class metadata {
                 ."\t\t" .'<meta property="og:updated_time" content="'.$this->modifiedTime.'">'.PHP_EOL
                 ."\t\t" .'<meta property="og:image"        content="'.$this->image.'">'.PHP_EOL
                 ."\t\t" .'<meta property="og:image:secure_url" content="'.$this->image.'">'.PHP_EOL
-                ."\t\t" .'<meta property="og:image:width"  content="625">'.PHP_EOL
-                ."\t\t" .'<meta property="og:image:height" content="621">';
+                ."\t\t" .'<meta property="og:image:width"  content="300">'.PHP_EOL
+                ."\t\t" .'<meta property="og:image:height" content="300">';
         if($this->pagetype === 'article'){
              $meta .= PHP_EOL."\t\t" .'<meta property="article:published_time" content="'.$this->publishedTime.'">'.PHP_EOL
                 ."\t\t" .'<meta property="article:modified_time"  content="'.$this->modifiedTime.'" />'.PHP_EOL
