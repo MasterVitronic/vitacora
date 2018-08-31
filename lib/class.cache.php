@@ -45,7 +45,7 @@ class MicroCache {
 			$this->memcache = new Memcache;
 			@$this->memcache->connect('localhost', 11211) or $this->c_type = 'file';
 		}
-		$this->key = md5( $key===false ? rtrim($_SERVER["REQUEST_URI"],'/') : rtrim($key,'/')  );
+		$this->key = md5( $key===false ? rtrim($_SERVER["REQUEST_URI"],'/') : $key  );
 		$this->file = $this->patch . $this->key . '.cache';
 	}
 
@@ -101,10 +101,13 @@ class MicroCache {
 	}
 
 	public function start() {
+        $date = spanishdate(date('h:i:s A'));
 		ob_start();
+        print('<!--Servido desde la cache. Almacenado el '.sprintf('%s %d de %s de %d %s', $date->dia, $date->fecha, $date->mes,$date->anio, $date->hora . "-->\n") );
 	}
 
 	public function end() {
+        print("<!--Fin de bloque en cache-->");
 		$buffer = ob_get_contents();
 		ob_end_clean();
 		$this->cache_on and $this->write($buffer);
