@@ -37,7 +37,7 @@ $controlador    = controlador::iniciar();
 $get_modulo     = $controlador->get_modulo();
 $auth           = auth::iniciar();
 $metatags       = metadata::iniciar();
-$cache          =  new MicroCache();
+$cache          = MicroCache::iniciar();
 $mustache       =  new Mustache_Engine(array(
     'loader'    => new Mustache_Loader_FilesystemLoader(
                         ROOT . DS . 'vistas',

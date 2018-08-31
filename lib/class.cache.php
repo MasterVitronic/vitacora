@@ -14,6 +14,7 @@
 */
 
 class MicroCache {
+
 	public $patch       = cache_patch;
 	public $lifetime    = cache_lifetime;
 	public $c_type      = cache_type;
@@ -23,6 +24,21 @@ class MicroCache {
 	public $file, $key;
 	private $memcache;
 
+    /**
+     * Instancia para el patrón de diseño singleton (instancia única)
+     * @var object instancia
+     * @access private
+     */
+    private static $instancia = null;
+
+    /**
+     * __construct
+     *
+     * Constructor de la clase
+     *
+     * @access public
+     *
+     */
 	function __construct($key=false) {
 		class_exists('Memcache') or $this->c_type = 'file';
 		if($this->c_type != 'file'){
@@ -32,6 +48,45 @@ class MicroCache {
 		$this->key = md5( $key===false ? $_SERVER["REQUEST_URI"] : $key);
 		$this->file = $this->patch . $this->key . '.cache';
 	}
+
+    /**
+     * __destruct
+     *
+     * Destructor, destruye automaticamente la clase.
+     *
+     * @access public
+     */
+    public function __destruct() {
+
+    }
+
+    /**
+     * Inicia la instancia de la clase
+     * @return object
+     */
+    public static function iniciar() {
+        if (!self::$instancia instanceof self) {
+            self::$instancia = new self;
+        }
+        return self::$instancia;
+    }
+
+    /**
+     * Método magico __clone
+     */
+    public function __clone() {
+        trigger_error('Operación Invalida:' .
+                ' clonación no permitida', E_USER_ERROR);
+    }
+
+    /**
+     * Método magico __wakeup
+     */
+    public function __wakeup() {
+        trigger_error('Operación Invalida:' .
+                ' deserializar no esta permitido ' .
+                get_class($this) . " Class. ", E_USER_ERROR);
+    }
 
 	public function check() {
 		return $this->is_cached = !$this->cache_on ? false
