@@ -29,6 +29,7 @@ class article {
     public  $dataToSave = [] ;
     private $sql;
     public  $action = false;
+    private $cache;
     
     /**
      * Instancia para el patrón de diseño singleton (instancia única)
@@ -53,6 +54,7 @@ class article {
         $this->limpiador    = limpiador::iniciar();
         $this->get          = $this->limpiador->recolectar($this->controlador->get_modulo(),tipo_db,true);
         $this->limit        = '';
+        $this->cache        = MicroCache::iniciar();
     }
 
     /**
@@ -524,10 +526,10 @@ class article {
      * togglea el status de post
      */ 
     public function toggleDraft($id_post){
-        $this->sql  = "select status from posts where id_post='$id_post'";
-        $status     = $this->cbd->get_var($this->sql);        
+        $this->sql  = "select status,url from posts where id_post='$id_post'";
+        $toggle     = $this->cbd->get_row($this->sql);        
         $this->dataToSave = [
-            'status'=> ($status === 't') ? 'f' : 't'
+            'status'=> ($toggle->status === 't') ? 'f' : 't'
         ];
         /*lo primero es iniciar la transaccion*/
         $this->cbd->beginTransaction();
@@ -540,6 +542,9 @@ class article {
             $result = false;
         }
         if($result === true){
+            /*@TODO implementar un metodo que busque la pagina de post y la borre de la cache*/
+            $this->cache->clear('/posts');
+            $this->cache->clear('/posts/'.$toggle->url);
             $this->cbd->commit();
         }else{
             $this->cbd->rollBack();
